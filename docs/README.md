@@ -49,75 +49,88 @@ kubectl get nodes -o wide
 
 * [Jaeger](https://www.jaegertracing.io/) - [https://istio.io/docs/tasks/telemetry/distributed-tracing/](https://istio.io/docs/tasks/telemetry/distributed-tracing/)
 
-    * ```shell
-      kubectl port-forward -n istio-system $(kubectl get pod -n istio-system -l app=jaeger -o jsonpath="{.items[0].metadata.name}") 16686:16686 &
-      ```
+  * ```shell
+    kubectl port-forward -n istio-system $(kubectl get pod -n istio-system \
+    -l app=jaeger -o jsonpath="{.items[0].metadata.name}") 16686:16686 &
+    ```
 
     * Link: [http://localhost:16686](http://localhost:16686)
 
 * [Prometheus](https://prometheus.io/) - [https://istio.io/docs/tasks/telemetry/querying-metrics/](https://istio.io/docs/tasks/telemetry/querying-metrics/)
 
-    * ```shell
-      kubectl -n istio-system port-forward $(kubectl -n istio-system get pod -l app=prometheus -o jsonpath="{.items[0].metadata.name}") 9090:9090 &
-      ```
+  * ```shell
+    kubectl -n istio-system port-forward $(kubectl -n istio-system get pod \
+    -l app=prometheus -o jsonpath="{.items[0].metadata.name}") 9090:9090 &
+    ```
 
-    * Link: [http://localhost:9090/graph](http://localhost:9090/graph)
+  * Link: [http://localhost:9090/graph](http://localhost:9090/graph)
 
 * [Grafana](https://grafana.com/) - [https://istio.io/docs/tasks/telemetry/using-istio-dashboard/](https://istio.io/docs/tasks/telemetry/using-istio-dashboard/)
 
-    * ```shell
-      kubectl -n istio-system port-forward $(kubectl -n istio-system get pod -l app=grafana -o jsonpath="{.items[0].metadata.name}") 3000:3000 &
-      ```
+  * ```shell
+    kubectl -n istio-system port-forward $(kubectl -n istio-system get pod \
+    -l app=grafana -o jsonpath="{.items[0].metadata.name}") 3000:3000 &
+    ```
 
-    * Link: [http://localhost:3000/dashboard/db/istio-mesh-dashboard](http://localhost:3000/dashboard/db/istio-mesh-dashboard)
+  * Link: [http://localhost:3000/dashboard/db/istio-mesh-dashboard](http://localhost:3000/dashboard/db/istio-mesh-dashboard)
 
 * [Kiali](https://www.kiali.io/) - [https://istio.io/docs/tasks/telemetry/kiali/](https://istio.io/docs/tasks/telemetry/kiali/)
 
-    * ```shell
-      kubectl -n istio-system port-forward $(kubectl -n istio-system get pod -l app=kiali -o jsonpath="{.items[0].metadata.name}") 20001:20001 &
-      ```
+  * ```shell
+    kubectl -n istio-system port-forward $(kubectl -n istio-system get pod \
+    -l app=kiali -o jsonpath="{.items[0].metadata.name}") 20001:20001 &
+    ```
 
-    * Login: admin
+  * Login: admin
 
-    * Password: admin
+  * Password: admin
 
-    * Link: [http://localhost:20001](http://localhost:20001)
+  * Link: [http://localhost:20001](http://localhost:20001)
 
 * Servicegraph - [https://istio.io/docs/tasks/telemetry/servicegraph/](https://istio.io/docs/tasks/telemetry/servicegraph/)
 
-    * ```shell
-      kubectl -n istio-system port-forward $(kubectl -n istio-system get pod -l app=servicegraph -o jsonpath="{.items[0].metadata.name}") 8088:8088 &
-      ```
+  * ```shell
+    kubectl -n istio-system port-forward $(kubectl -n istio-system get pod \
+    -l app=servicegraph -o jsonpath="{.items[0].metadata.name}") 8088:8088 &
+    ```
 
-    * Link: [http://localhost:8088/force/forcegraph.html](http://localhost:8088/force/forcegraph.html), [http://localhost:8088/dotviz](http://localhost:8088/dotviz)
+  * Link: [http://localhost:8088/force/forcegraph.html](http://localhost:8088/force/forcegraph.html),
+    [http://localhost:8088/dotviz](http://localhost:8088/dotviz)
 
 * [Kibana](https://www.elastic.co/products/kibana)
 
-    * ```shell
-      kubectl -n logging port-forward $(kubectl -n logging get pod -l role=kibana -o jsonpath="{.items[0].metadata.name}") 5601:5601 &
-      ```
+  * ```shell
+    kubectl -n logging port-forward $(kubectl -n logging get pod \
+    -l role=kibana -o jsonpath="{.items[0].metadata.name}") 5601:5601 &
+    ```
 
-    * Link: [https://localhost:5601](https://localhost:5601)
+  * Link: [https://localhost:5601](https://localhost:5601)
 
 * [Cerbero](https://github.com/lmenezes/cerebro)
 
-    * ```shell
-      kubectl -n logging port-forward $(kubectl -n logging get pod -l role=cerebro -o jsonpath="{.items[0].metadata.name}") 9000:9000 &
-      ```
+  * ```shell
+    kubectl -n logging port-forward $(kubectl -n logging get pod \
+    -l role=cerebro -o jsonpath="{.items[0].metadata.name}") 9000:9000 &
+    ```
 
-    * Link: [http://localhost:9000](http://localhost:9000)
+  * Link: [http://localhost:9000](http://localhost:9000)
 
 * [Ceph Dashboard](http://docs.ceph.com/docs/mimic/mgr/dashboard/)
 
-    * ```shell
-      kubectl -n rook-ceph port-forward $(kubectl -n rook-ceph get pod -l app=rook-ceph-mgr -o jsonpath="{.items[0].metadata.name}") 8443:8443 &
-      ```
+  * ```shell
+    kubectl -n rook-ceph port-forward $(kubectl -n rook-ceph get pod \
+    -l app=rook-ceph-mgr -o jsonpath="{.items[0].metadata.name}") 8443:8443 &
+    ```
 
-    * Login: admin
+  * Login: admin
 
-    * Password: `kubectl -n rook-ceph get secret rook-ceph-dashboard-password -o yaml | grep "password:" | awk '{print $2}' | base64 --decode`
+  * Password:
+    ```shell
+    kubectl -n rook-ceph get secret rook-ceph-dashboard-password -o yaml \
+    | grep "password:" | awk '{print $2}' | base64 --decode
+    ```
 
-    * Link: [https://localhost:8443/ceph-dashboard](https://localhost:8443/ceph-dashboard)
+  * Link: [https://localhost:8443/ceph-dashboard](https://localhost:8443/ceph-dashboard)
 
 ## Links
 
