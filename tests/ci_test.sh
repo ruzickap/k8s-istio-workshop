@@ -26,7 +26,6 @@ kubeadm-dind-cluster_install
 kubectl cluster-info
 
 # Commands
-export ISTIO_VERSION="1.0.6"
 sed -n '/^```bash$/,/^```$/p' docs/lab-0{3..6}/README.md | sed '/^```*/d' > README.sh
 source ./README.sh
 
