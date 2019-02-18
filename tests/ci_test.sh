@@ -29,3 +29,13 @@ kubectl cluster-info
 export ISTIO_VERSION="1.0.6"
 sed -n '/^```bash$/,/^```$/p' docs/lab-0{3..6}/README.md | sed '/^```*/d' > README.sh
 source ./README.sh
+
+# Istio cleanup
+helm del --purge istio
+kubectl -n istio-system delete job --all
+kubectl delete -f install/kubernetes/helm/istio/templates/crds.yaml -n istio-system
+kubectl delete namespace istio-system
+kubectl label namespace default istio-injection-
+
+cd ../..
+rm -rf tmp
