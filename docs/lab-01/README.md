@@ -1,8 +1,11 @@
 # Create VMs in OpenStack
 
-Create VMs in OpenStack using Ubuntu Docker image
+Before you start with the main content of the workshop, you need to provision
+the VMs in OpenStack.
 
-## Prepare the working environment inside Docker
+Create VMs in OpenStack using Ubuntu Docker image.
+
+## Prepare the local working environment inside Docker
 
 Run Ubuntu docker image and mount the directory there:
 
@@ -45,6 +48,9 @@ cd /mnt
 
 Start 3 VMs (one master and 2 workers) where the k8s will be installed.
 
+![Terraform](https://cdn-images-1.medium.com/max/1200/1*lYFNHNM03biX_95IQMayUw.png "Terraform")
+[https://hackernoon.com/terraform-openstack-ansible-d680ea466e22](https://hackernoon.com/terraform-openstack-ansible-d680ea466e22)
+
 Generate ssh keys if not exists:
 
 ```bash
@@ -57,25 +63,28 @@ if [ "`ssh-add -l`" = "The agent has no identities." ]; then ssh-add; fi
 Clone this git repository:
 
 ```bash
-git clone https://github.com/ruzickap/k8s-istio-demo
-cd k8s-istio-demo
+git clone https://github.com/ruzickap/k8s-istio-workshop
+cd k8s-istio-workshop
 ```
 
-Modify the Terraform variable file if needed:
+::: danger STOP
+Modify the Terraform variable file!
+:::
 
 ```bash
 OPENSTACK_PASSWORD=${OPENSTACK_PASSWORD:-default}
 
 cat > terrafrom/openstack/terraform.tfvars << EOF
 openstack_auth_url                          = "https://ic-us.ssl.mirantis.net:5000/v3"
-openstack_instance_flavor_name              = "compact.dbs"
+openstack_instance_flavor_name              = "dev.log"
 openstack_instance_image_name               = "bionic-server-cloudimg-amd64-20190119"
 openstack_networking_subnet_dns_nameservers = ["172.19.80.70"]
 openstack_password                          = "$OPENSTACK_PASSWORD"
+# drivetrain-team
 openstack_tenant_name                       = "mirantis-services-team"
 openstack_user_name                         = "pruzicka"
 openstack_user_domain_name                  = "ldap_mirantis"
-prefix                                      = "pruzicka-k8s-istio-demo"
+prefix                                      = "pruzicka-k8s-istio-workshop"
 EOF
 ```
 
@@ -101,9 +110,9 @@ Output:
 
 ```shell
 vms_name = [
-    pruzicka-k8s-istio-demo-node01.01.localdomain,
-    pruzicka-k8s-istio-demo-node02.01.localdomain,
-    pruzicka-k8s-istio-demo-node03.01.localdomain
+    pruzicka-k8s-istio-workshop-node01.01.localdomain,
+    pruzicka-k8s-istio-workshop-node02.01.localdomain,
+    pruzicka-k8s-istio-workshop-node03.01.localdomain
 ]
 vms_public_ip = [
     172.16.240.185,

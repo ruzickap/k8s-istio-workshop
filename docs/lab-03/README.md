@@ -53,13 +53,13 @@ NAME                                       READY   UP-TO-DATE   AVAILABLE   AGE 
 deployment.extensions/rook-ceph-operator   1/1     1            1           3m36s   rook-ceph-operator   rook/ceph:v0.9.2   app=rook-ceph-operator
 
 NAME                                      READY   STATUS    RESTARTS   AGE     IP               NODE                             NOMINATED NODE   READINESS GATES
-pod/rook-ceph-agent-2bxhq                 1/1     Running   0          2m14s   192.168.250.12   pruzicka-k8s-istio-demo-node02   <none>           <none>
-pod/rook-ceph-agent-8h4p4                 1/1     Running   0          2m14s   192.168.250.11   pruzicka-k8s-istio-demo-node01   <none>           <none>
-pod/rook-ceph-agent-mq69r                 1/1     Running   0          2m14s   192.168.250.13   pruzicka-k8s-istio-demo-node03   <none>           <none>
-pod/rook-ceph-operator-7478c899b5-px2hc   1/1     Running   0          3m37s   10.244.2.3       pruzicka-k8s-istio-demo-node02   <none>           <none>
-pod/rook-discover-8ffj8                   1/1     Running   0          2m14s   10.244.2.4       pruzicka-k8s-istio-demo-node02   <none>           <none>
-pod/rook-discover-l56jj                   1/1     Running   0          2m14s   10.244.1.2       pruzicka-k8s-istio-demo-node03   <none>           <none>
-pod/rook-discover-q9xwp                   1/1     Running   0          2m14s   10.244.0.4       pruzicka-k8s-istio-demo-node01   <none>           <none>
+pod/rook-ceph-agent-2bxhq                 1/1     Running   0          2m14s   192.168.250.12   pruzicka-k8s-istio-workshop-node02   <none>           <none>
+pod/rook-ceph-agent-8h4p4                 1/1     Running   0          2m14s   192.168.250.11   pruzicka-k8s-istio-workshop-node01   <none>           <none>
+pod/rook-ceph-agent-mq69r                 1/1     Running   0          2m14s   192.168.250.13   pruzicka-k8s-istio-workshop-node03   <none>           <none>
+pod/rook-ceph-operator-7478c899b5-px2hc   1/1     Running   0          3m37s   10.244.2.3       pruzicka-k8s-istio-workshop-node02   <none>           <none>
+pod/rook-discover-8ffj8                   1/1     Running   0          2m14s   10.244.2.4       pruzicka-k8s-istio-workshop-node02   <none>           <none>
+pod/rook-discover-l56jj                   1/1     Running   0          2m14s   10.244.1.2       pruzicka-k8s-istio-workshop-node03   <none>           <none>
+pod/rook-discover-q9xwp                   1/1     Running   0          2m14s   10.244.0.4       pruzicka-k8s-istio-workshop-node01   <none>           <none>
 ```
 
 Create your Rook cluster:
@@ -103,17 +103,17 @@ deployment.extensions/rook-ceph-osd-2   1/1     1            1           8m33s  
 deployment.extensions/rook-ceph-tools   1/1     1            1           12m     rook-ceph-tools   rook/ceph:master   app=rook-ceph-tools
 
 NAME                                                             READY   STATUS      RESTARTS   AGE     IP               NODE                             NOMINATED NODE   READINESS GATES
-pod/rook-ceph-mgr-a-669f5b47fc-sjvrr                             1/1     Running     0          9m33s   10.244.1.6       pruzicka-k8s-istio-demo-node03   <none>           <none>
-pod/rook-ceph-mon-a-784f8fb5b6-zcvjr                             1/1     Running     0          12m     10.244.0.5       pruzicka-k8s-istio-demo-node01   <none>           <none>
-pod/rook-ceph-mon-b-6dfbf486f4-2ktpm                             1/1     Running     0          11m     10.244.2.5       pruzicka-k8s-istio-demo-node02   <none>           <none>
-pod/rook-ceph-mon-c-6c85f6f44-j5wwv                              1/1     Running     0          10m     10.244.1.5       pruzicka-k8s-istio-demo-node03   <none>           <none>
-pod/rook-ceph-osd-0-6dd9cdc946-7th52                             1/1     Running     0          8m34s   10.244.1.8       pruzicka-k8s-istio-demo-node03   <none>           <none>
-pod/rook-ceph-osd-1-64cdd77897-9vdrh                             1/1     Running     0          8m33s   10.244.2.7       pruzicka-k8s-istio-demo-node02   <none>           <none>
-pod/rook-ceph-osd-2-67fcc446bd-skq52                             1/1     Running     0          8m33s   10.244.0.7       pruzicka-k8s-istio-demo-node01   <none>           <none>
-pod/rook-ceph-osd-prepare-pruzicka-k8s-istio-demo-node01-z29hj   0/2     Completed   0          8m39s   10.244.0.6       pruzicka-k8s-istio-demo-node01   <none>           <none>
-pod/rook-ceph-osd-prepare-pruzicka-k8s-istio-demo-node02-q8xqx   0/2     Completed   0          8m39s   10.244.2.6       pruzicka-k8s-istio-demo-node02   <none>           <none>
-pod/rook-ceph-osd-prepare-pruzicka-k8s-istio-demo-node03-vbwxv   0/2     Completed   0          8m39s   10.244.1.7       pruzicka-k8s-istio-demo-node03   <none>           <none>
-pod/rook-ceph-tools-76c7d559b6-s6s4l                             1/1     Running     0          12m     192.168.250.12   pruzicka-k8s-istio-demo-node02   <none>           <none>
+pod/rook-ceph-mgr-a-669f5b47fc-sjvrr                             1/1     Running     0          9m33s   10.244.1.6       pruzicka-k8s-istio-workshop-node03   <none>           <none>
+pod/rook-ceph-mon-a-784f8fb5b6-zcvjr                             1/1     Running     0          12m     10.244.0.5       pruzicka-k8s-istio-workshop-node01   <none>           <none>
+pod/rook-ceph-mon-b-6dfbf486f4-2ktpm                             1/1     Running     0          11m     10.244.2.5       pruzicka-k8s-istio-workshop-node02   <none>           <none>
+pod/rook-ceph-mon-c-6c85f6f44-j5wwv                              1/1     Running     0          10m     10.244.1.5       pruzicka-k8s-istio-workshop-node03   <none>           <none>
+pod/rook-ceph-osd-0-6dd9cdc946-7th52                             1/1     Running     0          8m34s   10.244.1.8       pruzicka-k8s-istio-workshop-node03   <none>           <none>
+pod/rook-ceph-osd-1-64cdd77897-9vdrh                             1/1     Running     0          8m33s   10.244.2.7       pruzicka-k8s-istio-workshop-node02   <none>           <none>
+pod/rook-ceph-osd-2-67fcc446bd-skq52                             1/1     Running     0          8m33s   10.244.0.7       pruzicka-k8s-istio-workshop-node01   <none>           <none>
+pod/rook-ceph-osd-prepare-pruzicka-k8s-istio-workshop-node01-z29hj   0/2     Completed   0          8m39s   10.244.0.6       pruzicka-k8s-istio-workshop-node01   <none>           <none>
+pod/rook-ceph-osd-prepare-pruzicka-k8s-istio-workshop-node02-q8xqx   0/2     Completed   0          8m39s   10.244.2.6       pruzicka-k8s-istio-workshop-node02   <none>           <none>
+pod/rook-ceph-osd-prepare-pruzicka-k8s-istio-workshop-node03-vbwxv   0/2     Completed   0          8m39s   10.244.1.7       pruzicka-k8s-istio-workshop-node03   <none>           <none>
+pod/rook-ceph-tools-76c7d559b6-s6s4l                             1/1     Running     0          12m     192.168.250.12   pruzicka-k8s-istio-workshop-node02   <none>           <none>
 ```
 
 Create a storage class based on the Ceph RBD volume plugin:
@@ -214,9 +214,9 @@ Output:
 +----+--------------------------------+-------+-------+--------+---------+--------+---------+-----------+
 | id |              host              |  used | avail | wr ops | wr data | rd ops | rd data |   state   |
 +----+--------------------------------+-------+-------+--------+---------+--------+---------+-----------+
-| 0  | pruzicka-k8s-istio-demo-node03 | 4302M | 15.0G |    0   |     0   |    0   |     0   | exists,up |
-| 1  | pruzicka-k8s-istio-demo-node02 | 4455M | 14.8G |    0   |     0   |    0   |     0   | exists,up |
-| 2  | pruzicka-k8s-istio-demo-node01 | 4948M | 14.3G |    0   |     0   |    0   |     0   | exists,up |
+| 0  | pruzicka-k8s-istio-workshop-node03 | 4302M | 15.0G |    0   |     0   |    0   |     0   | exists,up |
+| 1  | pruzicka-k8s-istio-workshop-node02 | 4455M | 14.8G |    0   |     0   |    0   |     0   | exists,up |
+| 2  | pruzicka-k8s-istio-workshop-node01 | 4948M | 14.3G |    0   |     0   |    0   |     0   | exists,up |
 +----+--------------------------------+-------+-------+--------+---------+--------+---------+-----------+
 ```
 
@@ -265,7 +265,7 @@ NAME                                           READY   UP-TO-DATE   AVAILABLE   
 deployment.extensions/elasticsearch-operator   1/1     1            1           106s   elasticsearch-operator   upmcenterprises/elasticsearch-operator:0.0.12   name=elasticsearch-operator,release=elasticsearch-operator
 
 NAME                                          READY   STATUS    RESTARTS   AGE    IP           NODE                             NOMINATED NODE   READINESS GATES
-pod/elasticsearch-operator-5dc59b8cc5-6946l   1/1     Running   0          106s   10.244.1.9   pruzicka-k8s-istio-demo-node03   <none>           <none>
+pod/elasticsearch-operator-5dc59b8cc5-6946l   1/1     Running   0          106s   10.244.1.9   pruzicka-k8s-istio-workshop-node03   <none>           <none>
 ```
 
 Install ElasticSearch cluster:
@@ -301,11 +301,11 @@ deployment.extensions/es-client-elasticsearch-cluster   1/1     1            1  
 deployment.extensions/kibana-elasticsearch-cluster      1/1     1            1           18m   kibana-elasticsearch-cluster      docker.elastic.co/kibana/kibana-oss:6.1.3                 component=elasticsearch-elasticsearch-cluster,name=kibana-elasticsearch-cluster,role=kibana
 
 NAME                                                    READY   STATUS    RESTARTS   AGE   IP            NODE                             NOMINATED NODE   READINESS GATES
-pod/cerebro-elasticsearch-cluster-64888cf977-dgb8g      1/1     Running   0          18m   10.244.0.9    pruzicka-k8s-istio-demo-node01   <none>           <none>
-pod/es-client-elasticsearch-cluster-8d9df64b7-tvl8z     1/1     Running   0          18m   10.244.1.11   pruzicka-k8s-istio-demo-node03   <none>           <none>
-pod/es-data-elasticsearch-cluster-rook-ceph-block-0     1/1     Running   0          18m   10.244.2.11   pruzicka-k8s-istio-demo-node02   <none>           <none>
-pod/es-master-elasticsearch-cluster-rook-ceph-block-0   1/1     Running   0          18m   10.244.2.10   pruzicka-k8s-istio-demo-node02   <none>           <none>
-pod/kibana-elasticsearch-cluster-7fb7f88f55-6sl6j       1/1     Running   0          18m   10.244.2.9    pruzicka-k8s-istio-demo-node02   <none>           <none>
+pod/cerebro-elasticsearch-cluster-64888cf977-dgb8g      1/1     Running   0          18m   10.244.0.9    pruzicka-k8s-istio-workshop-node01   <none>           <none>
+pod/es-client-elasticsearch-cluster-8d9df64b7-tvl8z     1/1     Running   0          18m   10.244.1.11   pruzicka-k8s-istio-workshop-node03   <none>           <none>
+pod/es-data-elasticsearch-cluster-rook-ceph-block-0     1/1     Running   0          18m   10.244.2.11   pruzicka-k8s-istio-workshop-node02   <none>           <none>
+pod/es-master-elasticsearch-cluster-rook-ceph-block-0   1/1     Running   0          18m   10.244.2.10   pruzicka-k8s-istio-workshop-node02   <none>           <none>
+pod/kibana-elasticsearch-cluster-7fb7f88f55-6sl6j       1/1     Running   0          18m   10.244.2.9    pruzicka-k8s-istio-workshop-node02   <none>           <none>
 
 NAME                                                                              STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS      AGE
 persistentvolumeclaim/es-data-es-data-elasticsearch-cluster-rook-ceph-block-0     Bound    pvc-870ad81a-2863-11e9-a470-fa163e90237a   1Gi        RWO            rook-ceph-block   18m
@@ -354,7 +354,7 @@ NAMESPACE   NAME                                    TYPE        CLUSTER-IP     E
 logging     service/fluent-bit-fluent-bit-metrics   ClusterIP   10.97.33.162   <none>        2020/TCP   80s   app=fluent-bit,release=fluent-bit
 
 NAMESPACE   NAME                              READY   STATUS    RESTARTS   AGE   IP            NODE                             NOMINATED NODE   READINESS GATES
-logging     pod/fluent-bit-fluent-bit-426ph   1/1     Running   0          80s   10.244.0.10   pruzicka-k8s-istio-demo-node01   <none>           <none>
-logging     pod/fluent-bit-fluent-bit-c6tbx   1/1     Running   0          80s   10.244.1.12   pruzicka-k8s-istio-demo-node03   <none>           <none>
-logging     pod/fluent-bit-fluent-bit-zfkqr   1/1     Running   0          80s   10.244.2.12   pruzicka-k8s-istio-demo-node02   <none>           <none>
+logging     pod/fluent-bit-fluent-bit-426ph   1/1     Running   0          80s   10.244.0.10   pruzicka-k8s-istio-workshop-node01   <none>           <none>
+logging     pod/fluent-bit-fluent-bit-c6tbx   1/1     Running   0          80s   10.244.1.12   pruzicka-k8s-istio-workshop-node03   <none>           <none>
+logging     pod/fluent-bit-fluent-bit-zfkqr   1/1     Running   0          80s   10.244.2.12   pruzicka-k8s-istio-workshop-node02   <none>           <none>
 ```

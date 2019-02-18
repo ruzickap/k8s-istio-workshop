@@ -2,9 +2,16 @@
 
 [![Build Status](https://travis-ci.com/ruzickap/k8s-istio-workshop.svg?branch=master)](https://travis-ci.com/ruzickap/k8s-istio-workshop)
 
-Web Pages: [https://ruzickap.github.io/k8s-istio-workshop/](https://ruzickap.github.io/k8s-istio-workshop/)
+Workshop pages:
 
-Full asciinema demo can be found here...
+* Web Pages: [https://ruzickap.github.io/k8s-istio-workshop/](https://ruzickap.github.io/k8s-istio-workshop/)
+* Markdown: [https://github.com/ruzickap/k8s-istio-workshop/tree/master/docs](https://github.com/ruzickap/k8s-istio-workshop/tree/master/docs)
+
+Full asciinema workshop demo can be found here:
+
+You will create this environment during the lab:
+
+![Lab diagram](docs/lab-02/kubeadm_diagram.png "Lab diagram")
 
 ## Links
 
