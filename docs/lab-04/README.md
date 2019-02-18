@@ -1,5 +1,10 @@
 # Install Istio
 
+* Istio architectue
+
+  ![Istio Architecture](https://istio.io/docs/concepts/what-is-istio/arch.svg "Istio Architecture")
+  [https://istio.io/docs/concepts/what-is-istio/](https://istio.io/docs/concepts/what-is-istio/)
+
 Either download Istio directly from [https://github.com/istio/istio/releases](https://github.com/istio/istio/releases)
 or get the latest version by using curl:
 
@@ -103,7 +108,7 @@ Configure Istio with a new log type and send those logs to the FluentD:
 kubectl apply -f ../../files/fluentd-istio.yaml
 ```
 
-Check + Enable Istio in default namespace
+Check + Enable Istio in default namespace.
 
 Let the default namespace to use Istio injection:
 

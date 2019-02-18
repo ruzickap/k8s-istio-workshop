@@ -24,6 +24,8 @@ After you complete this course, you'll be able to:
 * Secure your service mesh
 * Enforce policies for your microservices
 
+![Lab diagram](./lab-02/kubeadm_diagram.png "Lab diagram")
+
 ## Workshop
 
 You will perform the following exercises in the lab:

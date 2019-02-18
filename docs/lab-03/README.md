@@ -1,5 +1,10 @@
 # Install Helm, Rook and ElasticSearch
 
+* Helm Architecture:
+
+  ![Helm Architecture](https://cdn.app.compendium.com/uploads/user/e7c690e8-6ff9-102a-ac6d-e4aebca50425/5a29c3c1-7c6b-41fa-8082-bdc8a36177c9/Image/c64c01d08df64f4420e81f962fd13a23/screen_shot_2018_09_11_at_4_48_19_pm.png "Helm Architecture")
+  [https://blogs.oracle.com/cloudnative/helm-kubernetes-package-management](https://blogs.oracle.com/cloudnative/helm-kubernetes-package-management)
+
 Install [Helm](https://helm.sh/) binary locally:
 
 ```bash
@@ -358,3 +363,6 @@ logging     pod/fluent-bit-fluent-bit-426ph   1/1     Running   0          80s  
 logging     pod/fluent-bit-fluent-bit-c6tbx   1/1     Running   0          80s   10.244.1.12   pruzicka-k8s-istio-workshop-node03   <none>           <none>
 logging     pod/fluent-bit-fluent-bit-zfkqr   1/1     Running   0          80s   10.244.2.12   pruzicka-k8s-istio-workshop-node02   <none>           <none>
 ```
+
+After these steps you should have Helm + ElasticSearch + Rook installed
+and configured.
