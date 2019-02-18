@@ -31,6 +31,7 @@ jobs:
 
     - stage: Tests
       name: "Markdown test"
+      language: node_js
       node_js:
         - "10"
       install:
@@ -59,14 +60,18 @@ jobs:
 
     - stage: Build & Deploy
       name: "Build and Deploy to GitHub pages"
+      language: node_js
       node_js:
         - "10"
       install:
-        - npm install -g vuepress @vuepress/plugin-medium-zoom @vuepress/plugin-back-to-top vuepress-plugin-seo
+        - npm install -g vuepress@next
+        - npm install @vuepress/plugin-medium-zoom @vuepress/plugin-back-to-top vuepress-plugin-seo
       script:
         - vuepress build docs
       after_success:
-        - mv --verbose README.md LICENSE docs/.vuepress/dist
+        - mv --verbose LICENSE docs/.vuepress/dist
+        - sed 's@docs/@https://raw.githubusercontent.com/ruzickap/k8s-istio-workshop/master/docs/@' README.md > docs/.vuepress/dist/README.md
+
       deploy:
         provider: pages
         local-dir: docs/.vuepress/dist
