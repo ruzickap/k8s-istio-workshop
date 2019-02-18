@@ -1,0 +1,73 @@
+---
+dist: xenial
+
+jobs:
+  include:
+    - stage: Tests
+      name: "Terraform checks"
+      install:
+        # Install Terraform
+        - export TERRAFORM_LATEST_VERSION=$(curl -s https://checkpoint-api.hashicorp.com/v1/check/terraform | jq -r -M '.current_version')
+        - curl --silent --location https://releases.hashicorp.com/terraform/${TERRAFORM_LATEST_VERSION}/terraform_${TERRAFORM_LATEST_VERSION}_linux_amd64.zip --output /tmp/terraform_linux_amd64.zip
+        - sudo unzip -q -o /tmp/terraform_linux_amd64.zip -d /usr/local/bin/
+      script:
+        # Generate ssh key if needed
+        - install -m 0700 -d $HOME/.ssh
+        - ssh-keygen -t rsa -f $HOME/.ssh/id_rsa -q -N ""
+        # Fill terraform variables with test data
+        - |
+          cat > terraform.tfvars << EOF
+          openstack_instance_image_name  = "test"
+          openstack_password             = "test"
+          openstack_tenant_name          = "test"
+          openstack_user_domain_name     = "test"
+          openstack_user_name            = "test"
+          openstack_auth_url             = "test"
+          openstack_instance_flavor_name = "test"
+          EOF
+        # Run terraform checks
+        - terraform init     -var-file=terraform.tfvars terrafrom/openstack
+        - terraform validate -var-file=terraform.tfvars terrafrom/openstack
+
+    - stage: Tests
+      name: "Markdown test"
+      node_js:
+        - "10"
+      install:
+        # Install markdownlint and markdown-link-check
+        - npm install -g markdownlint-cli markdown-link-check > /dev/null
+      script:
+        # Markdown check
+        - 'echo "{ \"line-length\": false }" > /tmp/markdownlint_config.json'
+        - find . -name "*.md" -print0 | xargs -0 markdownlint -c /tmp/markdownlint_config.json
+        # Link Checks
+        - 'echo "{ \"ignorePatterns\": [ { \"pattern\": \"^(http|https)://localhost\" } ] }" > /tmp/config.json'
+        - find . -name "*.md" -print0 | xargs -0 markdown-link-check --config /tmp/config.json --quiet
+
+    - stage: Tests
+      name: "Command check"
+      addons:
+        apt:
+          packages:
+            - siege
+      services:
+        - docker
+      script:
+        - tests/ci_test.sh
+
+    - stage: Build & Deploy
+      name: "Build and Deploy to GitHub pages"
+      node_js:
+        - "10"
+      install:
+        - npm install -g vuepress @vuepress/plugin-medium-zoom @vuepress/plugin-back-to-top vuepress-plugin-seo
+      script:
+        - vuepress build docs
+      after_success:
+        - mv --verbose README.md LICENSE docs/.vuepress/dist
+      deploy:
+        provider: pages
+        local-dir: docs/.vuepress/dist
+        skip-cleanup: true
+        github-token: $GITHUB_TOKEN
+        target-branch: gh-pages
