@@ -15,6 +15,7 @@ module.exports = {
         items: [
           { text: 'Istio', link: 'https://istio.io/' },
           { text: 'Istio docs', link: 'https://istio.io/docs/' },
+          { text: 'Istio workshop', link: 'https://github.com/ruzickap/k8s-istio-workshop' }
           { text: 'Istio demo', link: 'https://github.com/ruzickap/k8s-istio-demo' }
         ]
       }
