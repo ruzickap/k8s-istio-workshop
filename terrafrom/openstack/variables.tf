@@ -60,7 +60,7 @@ variable "domain" {
 
 variable "prefix" {
   description = "Prefix used for all names"
-  default     = "k8s-istio-demo"
+  default     = "k8s-istio-workshop"
 }
 
 variable "username" {
