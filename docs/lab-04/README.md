@@ -9,6 +9,7 @@ Either download Istio directly from [https://github.com/istio/istio/releases](ht
 or get the latest version by using curl:
 
 ```bash
+export ISTIO_VERSION="1.0.5"
 test -d tmp || mkdir tmp
 cd tmp
 curl -sL https://git.io/getLatestIstio | sh -

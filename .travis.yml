@@ -47,8 +47,6 @@ jobs:
 
     - stage: Tests
       name: "Command check"
-      env:
-        - ISTIO_VERSION="1.0.6"
       addons:
         apt:
           packages:
