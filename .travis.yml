@@ -39,7 +39,7 @@ jobs:
         - npm install -g markdownlint-cli markdown-link-check > /dev/null
       script:
         # Markdown check
-        - 'echo "{ \"line-length\": false }" > /tmp/markdownlint_config.json'
+        - 'echo "{ MD013: { code_blocks: false } }" > /tmp/markdownlint_config.json'
         - find . -name "*.md" -print0 | xargs -0 markdownlint -c /tmp/markdownlint_config.json
         # Link Checks
         - 'echo "{ \"ignorePatterns\": [ { \"pattern\": \"^(http|https)://localhost\" } ] }" > /tmp/config.json'

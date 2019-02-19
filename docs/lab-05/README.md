@@ -6,22 +6,29 @@ Check how Istio can be used and how it works...
 
 The Bookinfo application is broken into four separate microservices:
 
-* `productpage` - the productpage microservice calls the details and reviews microservices to populate the page.
+* `productpage` - the productpage microservice calls the details and reviews
+  microservices to populate the page.
 * `details` - the details microservice contains book information.
-* `reviews` - the reviews microservice contains book reviews. It also calls the ratings microservice.
-* `ratings` - the ratings microservice contains book ranking information that accompanies a book review.
+* `reviews` - the reviews microservice contains book reviews. It also calls
+  the ratings microservice.
+* `ratings` - the ratings microservice contains book ranking information
+  that accompanies a book review.
 
 There are 3 versions of the `reviews` microservice:
 
 * Version `v1` - doesn’t call the **ratings service**.
-* Version `v2` - calls the ratings service, and displays each rating as 1 to 5 **black stars**.
-* Version `v3` - calls the ratings service, and displays each rating as 1 to 5 **red stars**.
+* Version `v2` - calls the ratings service, and displays each rating as 1 to 5
+  **black stars**.
+* Version `v3` - calls the ratings service, and displays each rating as 1 to 5
+  **red stars**.
 
 [Bookinfo](https://istio.io/docs/examples/bookinfo/) application architecture:
 
-![Application Architecture without Istio](https://istio.io/docs/examples/bookinfo/noistio.svg "Application Architecture without Istio")
+![Application Architecture without Istio](https://istio.io/docs/examples/bookinfo/noistio.svg
+"Application Architecture without Istio")
 
-![Application Architecture with Istio](https://istio.io/docs/examples/bookinfo/withistio.svg "Application Architecture with Istio")
+![Application Architecture with Istio](https://istio.io/docs/examples/bookinfo/withistio.svg
+"Application Architecture with Istio")
 
 Deploy the demo of [Bookinfo](https://istio.io/docs/examples/bookinfo/) application:
 
@@ -68,14 +75,16 @@ pod/reviews-v2-7fc9bb6dcf-snshx           2/2     Running   0          4m18s   1
 pod/reviews-v3-c995979bc-wcql9            2/2     Running   0          4m18s   10.244.0.12   pruzicka-k8s-istio-workshop-node01   <none>           <none>
 ```
 
-Check the container details - you should see also container `istio-proxy` next to `productpage`:
+Check the container details - you should see also container `istio-proxy` next
+to `productpage`:
 
 ```bash
 kubectl describe pod -l app=productpage
 kubectl logs $(kubectl get pod -l app=productpage -o jsonpath="{.items[0].metadata.name}") istio-proxy --tail=5
 ```
 
-Define the [Istio gateway](https://istio.io/docs/reference/config/istio.networking.v1alpha3/#Gateway) for the application:
+Define the [Istio gateway](https://istio.io/docs/reference/config/istio.networking.v1alpha3/#Gateway)
+for the application:
 
 ```bash
 cat samples/bookinfo/networking/bookinfo-gateway.yaml
@@ -132,7 +141,8 @@ Output:
 200
 ```
 
-Create default [destination rules](https://istio.io/docs/reference/config/istio.networking.v1alpha3/#DestinationRule) (subsets) for the Bookinfo services:
+Create default [destination rules](https://istio.io/docs/reference/config/istio.networking.v1alpha3/#DestinationRule)
+(subsets) for the Bookinfo services:
 
 ```bash
 kubectl apply -f samples/bookinfo/networking/destination-rule-all.yaml
@@ -157,9 +167,15 @@ Open the browser with these pages:
 * [http://localhost:20001](http://localhost:20001) (admin/admin)
 * [http://localhost:16686](http://localhost:16686)
 * [https://localhost:5601/app/kibana](https://localhost:5601/app/kibana)
-* [http://localhost:3000](http://localhost:3000) (Grafana -> Home -> Istio -> Istio Performance Dashboard, Istio Service Dashboard, Istio Workload Dashboard )
+* [http://localhost:3000](http://localhost:3000) (Grafana -> Home -> Istio ->
+  Istio Performance Dashboard, Istio Service Dashboard,
+  Istio Workload Dashboard)
 
-* Open the Bookinfo site in your browser `http://$GATEWAY_URL/productpage` and refresh the page several times - you should see different versions of reviews shown in productpage, presented in a **round robin style** (red stars, black stars, no stars), since we haven’t yet used Istio to control the version routing.
+* Open the Bookinfo site in your browser `http://$GATEWAY_URL/productpage`
+  and refresh the page several times - you should see different versions
+  of reviews shown in productpage, presented in a **round robin style**
+  (red stars, black stars, no stars), since we haven’t yet used Istio to control
+  the version routing.
 
 ![Bookinfo v1, v3, v2](./bookinfo_v1_v3_v2.gif "Bookinfo v1, v3, v2")
 
@@ -248,7 +264,9 @@ spec:
         subset: v1
 ```
 
-* Open the Bookinfo site in your browser `http://$GATEWAY_URL/productpage` and notice that the reviews part of the page displays with no rating stars, no matter how many times you refresh.
+* Open the Bookinfo site in your browser `http://$GATEWAY_URL/productpage`
+  and notice that the reviews part of the page displays with no rating stars,
+  no matter how many times you refresh.
 
 ![Bookinfo v1](./bookinfo_v1.jpg "Bookinfo v1")
 
@@ -258,7 +276,9 @@ spec:
 
 [https://istio.io/docs/tasks/traffic-management/request-routing/#route-based-on-user-identity](https://istio.io/docs/tasks/traffic-management/request-routing/#route-based-on-user-identity)
 
-All traffic from a user named `jason` will be routed to the service `reviews:v2` by forwarding HTTP requests with custom end-user header to the appropriate reviews service.
+All traffic from a user named `jason` will be routed to the service `reviews:v2`
+by forwarding HTTP requests with custom end-user header to the appropriate
+reviews service.
 
 Enable user-based routing:
 
@@ -298,7 +318,8 @@ spec:
         subset: v1
 ```
 
-* On the /productpage of the Bookinfo app, log in as user `jason` and refresh the browser.
+* On the /productpage of the Bookinfo app, log in as user `jason` and refresh
+  the browser.
 
 * Log in as another user (pick any name you wish) and refresh the browser
 
@@ -327,7 +348,8 @@ You can do the same with `user-agent header` or `URI` for example:
 
 [https://istio.io/docs/tasks/traffic-management/fault-injection/#injecting-an-http-delay-fault](https://istio.io/docs/tasks/traffic-management/fault-injection/#injecting-an-http-delay-fault)
 
-Inject a 7s delay between the `reviews:v2` and ratings microservices for user `jason`:
+Inject a 7s delay between the `reviews:v2` and ratings microservices for
+user `jason`:
 
 ```bash
 kubectl apply -f samples/bookinfo/networking/virtual-service-ratings-test-delay.yaml
@@ -376,11 +398,14 @@ Error fetching product reviews!
 Sorry, product reviews are currently unavailable for this book.
 ```
 
-![Bookinfo Injecting an HTTP delay fault](./bookinfo_injecting_http_delay_fault.gif "Bookinfo Injecting an HTTP delay fault")
+![Bookinfo Injecting an HTTP delay fault](./bookinfo_injecting_http_delay_fault.gif
+"Bookinfo Injecting an HTTP delay fault")
 
-* Open the Developer Tools menu (F12) -> Network tab - webpage actually loads in about 6 seconds.
+* Open the Developer Tools menu (F12) -> Network tab - webpage actually loads
+  in about 6 seconds.
 
-The following example introduces a **5 second delay** in **10%** of the requests to the `v1` version of the `ratings` microservice:
+The following example introduces a **5 second delay** in **10%** of the requests
+to the `v1` version of the `ratings` microservice:
 
 ```yaml
 apiVersion: networking.istio.io/v1alpha3
@@ -451,15 +476,19 @@ spec:
         subset: v1
 ```
 
-* On the `/productpage`, log in as user `jason` - the page loads immediately and the product ratings not available message appears.
+* On the `/productpage`, log in as user `jason` - the page loads immediately
+  and the product ratings not available message appears.
 
-![Bookinfo Injecting an HTTP abort fault](./bookinfo_injecting_http_abort_fault.gif "Bookinfo Injecting an HTTP abort fault")
+![Bookinfo Injecting an HTTP abort fault](./bookinfo_injecting_http_abort_fault.gif
+"Bookinfo Injecting an HTTP abort fault")
 
 * Check the flows in Kiali graph
 
-![Injecting an HTTP abort fault Kiali Graph](./istio_kiali_injecting_an_http_abort_fault.gif "Injecting an HTTP abort fault Kiali Graph")
+![Injecting an HTTP abort fault Kiali Graph](./istio_kiali_injecting_an_http_abort_fault.gif
+"Injecting an HTTP abort fault Kiali Graph")
 
-The following example returns an **HTTP 400** error code for **10%** of the requests to the `ratings` service `v1`:
+The following example returns an **HTTP 400** error code for **10%** of the
+requests to the `ratings` service `v1`:
 
 ```yaml
 apiVersion: networking.istio.io/v1alpha3
@@ -486,9 +515,13 @@ spec:
 
 [https://istio.io/docs/tasks/traffic-management/traffic-shifting/#apply-weight-based-routing](https://istio.io/docs/tasks/traffic-management/traffic-shifting/#apply-weight-based-routing)
 
-In **Canary Deployments**, newer versions of services are incrementally rolled out to users to minimize the risk and impact of any bugs introduced by the newer version.
+In **Canary Deployments**, newer versions of services are incrementally rolled
+out to users to minimize the risk and impact of any bugs introduced by the newer
+version.
 
-Route a percentage of traffic to one service or another - send **%50** of traffic to `reviews:v1` and **%50** to `reviews:v3` and finally complete the migration by sending %100 of traffic to `reviews:v3`.
+Route a percentage of traffic to one service or another - send **%50**
+of traffic to `reviews:v1` and **%50** to `reviews:v3` and finally complete
+the migration by sending %100 of traffic to `reviews:v3`.
 
 Route all traffic to the `reviews:v1` version of each microservice:
 
@@ -531,21 +564,25 @@ spec:
       weight: 50
 ```
 
-* Refresh the `/productpage` in your browser and you now see **red** colored star ratings approximately **50%** of the time.
+* Refresh the `/productpage` in your browser and you now see **red** colored
+  star ratings approximately **50%** of the time.
 
 * Check the flows in Kiali graph
 
-![Weight-based routing Kiali Graph](./istio_kiali_weight-based_routing.gif "Weight-based routing Kiali Graph")
+![Weight-based routing Kiali Graph](./istio_kiali_weight-based_routing.gif
+"Weight-based routing Kiali Graph")
 
 -----
 
-Assuming you decide that the `reviews:v3` microservice is stable, you can route **100%** of the traffic to `reviews:v3` by applying this virtual service.
+Assuming you decide that the `reviews:v3` microservice is stable, you can
+route **100%** of the traffic to `reviews:v3` by applying this virtual service.
 
 ```bash
 kubectl apply -f samples/bookinfo/networking/virtual-service-reviews-v3.yaml
 ```
 
-* When you refresh the `/productpage` you will always see book reviews with **red** colored star ratings for **each** review.
+* When you refresh the `/productpage` you will always see book reviews
+  with **red** colored star ratings for **each** review.
 
 ![Bookinfo v3](./bookinfo_v3.jpg "Bookinfo v3")
 
@@ -557,7 +594,8 @@ kubectl apply -f samples/bookinfo/networking/virtual-service-reviews-v3.yaml
 
 Mirroring sends a copy of live traffic to a mirrored service.
 
-First all traffic will go to `reviews:v1`, then the rule will be applied to mirror a portion of traffic to `reviews:v2`.
+First all traffic will go to `reviews:v1`, then the rule will be applied
+to mirror a portion of traffic to `reviews:v2`.
 
 Apply the virtual services which will route all traffic to `v1` of each microservice:
 

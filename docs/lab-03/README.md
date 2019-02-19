@@ -2,7 +2,8 @@
 
 * Helm Architecture:
 
-  ![Helm Architecture](https://cdn.app.compendium.com/uploads/user/e7c690e8-6ff9-102a-ac6d-e4aebca50425/5a29c3c1-7c6b-41fa-8082-bdc8a36177c9/Image/c64c01d08df64f4420e81f962fd13a23/screen_shot_2018_09_11_at_4_48_19_pm.png "Helm Architecture")
+  ![Helm Architecture](https://cdn.app.compendium.com/uploads/user/e7c690e8-6ff9-102a-ac6d-e4aebca50425/5a29c3c1-7c6b-41fa-8082-bdc8a36177c9/Image/c64c01d08df64f4420e81f962fd13a23/screen_shot_2018_09_11_at_4_48_19_pm.png
+  "Helm Architecture")
   [https://blogs.oracle.com/cloudnative/helm-kubernetes-package-management](https://blogs.oracle.com/cloudnative/helm-kubernetes-package-management)
 
 Install [Helm](https://helm.sh/) binary locally:
@@ -35,9 +36,11 @@ kube-system   tiller-deploy-dbb85cb99-z4c47   1/1     Running   0          28s
 
 ## Instal Rook
 
-![Rook Architecture](https://raw.githubusercontent.com/rook/rook/master/Documentation/media/kubernetes.png "Rook Architecture")
+![Rook Architecture](https://raw.githubusercontent.com/rook/rook/master/Documentation/media/kubernetes.png
+"Rook Architecture")
 
-Install [Rook](https://rook.io/) Operator ([Ceph](https://ceph.com/) storage for k8s):
+Install [Rook](https://rook.io/) Operator
+([Ceph](https://ceph.com/) storage for k8s):
 
 ```bash
 helm repo add rook-stable https://charts.rook.io/stable
@@ -244,7 +247,12 @@ POOLS:
 
 ## Install ElasticSearch and Kibana
 
-Add [ElasticSearch operator](https://github.com/upmc-enterprises/elasticsearch-operator) to Helm:
+![Kubernetes + ELK](https://cdn-images-1.medium.com/max/1200/1*779CspzO_Tgeyywv5z8nag.jpeg
+"Kubernetes + ELK")
+[https://medium.com/@FedakV/deployment-of-full-scale-elk-stack-to-kubernetes-it-svit-devops-solution-8de9516f96a7](https://medium.com/@FedakV/deployment-of-full-scale-elk-stack-to-kubernetes-it-svit-devops-solution-8de9516f96a7)
+
+Add [ElasticSearch operator](https://github.com/upmc-enterprises/elasticsearch-operator)
+to Helm:
 
 ```bash
 helm repo add es-operator https://raw.githubusercontent.com/upmc-enterprises/elasticsearch-operator/master/charts/
@@ -342,7 +350,14 @@ kubectl -n logging port-forward $(kubectl -n logging get pod -l role=kibana -o j
 
 Configure ElasticSearch:
 
-* Navigate to the [Kibana UI](https://localhost:5601) and click the "Set up index patterns" in the top right.
+Run firefox inside docker container:
+
+```shell
+firefox &
+```
+
+* Navigate to the [Kibana UI](https://localhost:5601) ([https://localhost:5601](https://localhost:5601))
+  and click the "Set up index patterns" in the top right.
 * Use * as the index pattern, and click "Next step.".
 * Select @timestamp as the Time Filter field name, and click "Create index pattern."
 
