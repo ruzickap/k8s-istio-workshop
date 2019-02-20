@@ -2,7 +2,7 @@
 
 ![Kubernetes + ELK](https://cdn-images-1.medium.com/max/1200/1*779CspzO_Tgeyywv5z8nag.jpeg
 "Kubernetes + ELK")
-[https://medium.com/@FedakV/deployment-of-full-scale-elk-stack-to-kubernetes-it-svit-devops-solution-8de9516f96a7](https://medium.com/@FedakV/deployment-of-full-scale-elk-stack-to-kubernetes-it-svit-devops-solution-8de9516f96a7)
+([https://medium.com/@FedakV/deployment-of-full-scale-elk-stack-to-kubernetes-it-svit-devops-solution-8de9516f96a7](https://medium.com/@FedakV/deployment-of-full-scale-elk-stack-to-kubernetes-it-svit-devops-solution-8de9516f96a7))
 
 Add [ElasticSearch operator](https://github.com/upmc-enterprises/elasticsearch-operator)
 to Helm:
@@ -131,3 +131,17 @@ logging     pod/fluent-bit-fluent-bit-426ph   1/1     Running   0          80s  
 logging     pod/fluent-bit-fluent-bit-c6tbx   1/1     Running   0          80s   10.244.1.12   pruzicka-k8s-istio-workshop-node03   <none>           <none>
 logging     pod/fluent-bit-fluent-bit-zfkqr   1/1     Running   0          80s   10.244.2.12   pruzicka-k8s-istio-workshop-node02   <none>           <none>
 ```
+
+Setup the port forwarding to Cerebro:
+
+```bash
+kubectl -n logging port-forward $(kubectl -n logging get pod -l role=cerebro -o jsonpath="{.items[0].metadata.name}") 9000:9000 &
+```
+
+Kibana ([https://localhost:5601](https://localhost:5601)):
+
+![Kibana](./kibana.png "Kibana")
+
+Cerebro ([https://localhost:9000](https://localhost:9000)):
+
+![Kibana](./kibana.png "Kibana")

@@ -13,10 +13,18 @@ The Bookinfo application is broken into four separate microservices:
 There are 3 versions of the `reviews` microservice:
 
 * Version `v1` - doesn’t call the **ratings service**.
+
+  ![Bookinfo v1](./bookinfo_v1_raiting.png "Bookinfo v1")
+
 * Version `v2` - calls the ratings service, and displays each rating as 1 to 5
   **black stars**.
+
+  ![Bookinfo v2](./bookinfo_v2_raiting.png "Bookinfo v2")
+
 * Version `v3` - calls the ratings service, and displays each rating as 1 to 5
   **red stars**.
+
+  ![Bookinfo v3](./bookinfo_v3_raiting.png "Bookinfo v3")
 
 [Bookinfo](https://istio.io/docs/examples/bookinfo/) application architecture:
 
@@ -72,11 +80,12 @@ pod/reviews-v3-c995979bc-wcql9            2/2     Running   0          4m18s   1
 ```
 
 Check the container details - you should see also container `istio-proxy` next
-to `productpage`:
+to `productpage`.
+The `kubectl logs` command will show you the output of the envoy proxy.
 
 ```bash
 kubectl describe pod -l app=productpage
-kubectl logs $(kubectl get pod -l app=productpage -o jsonpath="{.items[0].metadata.name}") istio-proxy --tail=5
+kubectl logs $(kubectl get pod -l app=productpage -o jsonpath="{.items[0].metadata.name}") istio-proxy
 ```
 
 Define the [Istio gateway](https://istio.io/docs/reference/config/istio.networking.v1alpha3/#Gateway)
@@ -158,20 +167,39 @@ siege --log=/tmp/siege --concurrent=1 -q --internet --time=5M $GATEWAY_URL/produ
 
 Open the browser with these pages:
 
-* [http://localhost:8088/force/forcegraph.html](http://localhost:8088/force/forcegraph.html)
-* [http://localhost:8088/dotviz](http://localhost:8088/dotviz)
-* [http://localhost:20001](http://localhost:20001) (admin/admin)
-* [http://localhost:16686](http://localhost:16686)
-* [https://localhost:5601/app/kibana](https://localhost:5601/app/kibana)
-* [http://localhost:3000](http://localhost:3000) (Grafana -> Home -> Istio ->
+* Servicegraph:
+
+  [http://localhost:8088/force/forcegraph.html](http://localhost:8088/force/forcegraph.html)
+
+  [http://localhost:8088/dotviz](http://localhost:8088/dotviz)
+
+* [Kiali](https://www.kiali.io/):
+
+  [http://localhost:20001](http://localhost:20001) (admin/admin)
+
+* [Jaeger](https://www.jaegertracing.io/):
+
+  [http://localhost:16686](http://localhost:16686)
+
+* [Prometheus](https://prometheus.io/):
+
+  [http://localhost:9090/graph](http://localhost:9090/graph)
+
+* [Kibana](https://www.elastic.co/products/kibana):
+
+  [https://localhost:5601/app/kibana](https://localhost:5601/app/kibana)
+
+* [Grafana](https://grafana.com/):
+
+  [http://localhost:3000](http://localhost:3000) (Grafana -> Home -> Istio ->
   Istio Performance Dashboard, Istio Service Dashboard,
   Istio Workload Dashboard)
 
-* Open the Bookinfo site in your browser `http://$GATEWAY_URL/productpage`
-  and refresh the page several times - you should see different versions
-  of reviews shown in productpage, presented in a **round robin style**
-  (red stars, black stars, no stars), since we haven’t yet used Istio to control
-  the version routing.
+Open the Bookinfo site in your browser `http://$GATEWAY_URL/productpage`
+and refresh the page several times - you should see different versions
+of reviews shown in productpage, presented in a **round robin style**
+(red stars, black stars, no stars), since we haven’t yet used Istio to control
+the version routing.
 
 ![Bookinfo v1, v3, v2](./bookinfo_v1_v3_v2.gif "Bookinfo v1, v3, v2")
 

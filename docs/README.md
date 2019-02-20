@@ -139,7 +139,7 @@ kubectl get nodes -o wide
     | grep "password:" | awk '{print $2}' | base64 --decode
     ```
 
-  * Link: [https://localhost:8443/ceph-dashboard](https://localhost:8443/ceph-dashboard)
+  * Link: [https://localhost:8443](https://localhost:8443)
 
 ## Links
 
