@@ -18,3 +18,5 @@ nohup.out
 README.sh
 # ignore builded pages by Vuepress
 docs/.vuepress/dist
+# ignore tmp directory
+tmp
