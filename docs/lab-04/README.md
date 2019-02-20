@@ -1,158 +1,210 @@
-# Install Istio
+# Instal Rook
 
-* Istio architectue
+![Rook Architecture](https://raw.githubusercontent.com/rook/rook/master/Documentation/media/kubernetes.png
+"Rook Architecture")
 
-  ![Istio Architecture](https://istio.io/docs/concepts/what-is-istio/arch.svg
-  "Istio Architecture")
-  [https://istio.io/docs/concepts/what-is-istio/](https://istio.io/docs/concepts/what-is-istio/)
-
-Either download Istio directly from [https://github.com/istio/istio/releases](https://github.com/istio/istio/releases)
-or get the latest version by using curl:
+Install [Rook](https://rook.io/) Operator
+([Ceph](https://ceph.com/) storage for k8s):
 
 ```bash
-export ISTIO_VERSION="1.0.5"
-test -d tmp || mkdir tmp
-cd tmp
-curl -sL https://git.io/getLatestIstio | sh -
+helm repo add rook-stable https://charts.rook.io/stable
+helm install --wait --name rook-ceph --namespace rook-ceph-system rook-stable/rook-ceph
+sleep 110
 ```
 
-Change the directory to the Istio installation files location:
+See how the rook-ceph-system should look like:
 
 ```bash
-cd istio*
-```
-
-Install `istioctl`:
-
-```bash
-sudo mv bin/istioctl /usr/local/bin/
-```
-
-Install [Istio](https://istio.io/) using Helm:
-
-```bash
-helm install --wait --name istio --namespace istio-system install/kubernetes/helm/istio \
-  --set gateways.istio-ingressgateway.type=NodePort \
-  --set gateways.istio-egressgateway.type=NodePort \
-  --set grafana.enabled=true \
-  --set kiali.enabled=true \
-  --set kiali.dashboard.grafanaURL=http://localhost:3000 \
-  --set kiali.dashboard.jaegerURL=http://localhost:16686 \
-  --set servicegraph.enabled=true \
-  --set telemetry-gateway.grafanaEnabled=true \
-  --set telemetry-gateway.prometheusEnabled=true \
-  --set tracing.enabled=true
-```
-
-See the Istio components:
-
-```bash
-kubectl get --namespace=istio-system svc,deployment,pods -o wide
+kubectl get svc,deploy,po --namespace=rook-ceph-system -o wide
 ```
 
 Output:
 
 ```shell
-NAME                             TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)                                                                                                                   AGE   SELECTOR
-service/grafana                  ClusterIP   10.101.117.126   <none>        3000/TCP                                                                                                                  15m   app=grafana
-service/istio-citadel            ClusterIP   10.99.235.151    <none>        8060/TCP,9093/TCP                                                                                                         15m   istio=citadel
-service/istio-egressgateway      NodePort    10.105.213.174   <none>        80:31610/TCP,443:31811/TCP                                                                                                15m   app=istio-egressgateway,istio=egressgateway
-service/istio-galley             ClusterIP   10.110.154.0     <none>        443/TCP,9093/TCP                                                                                                          15m   istio=galley
-service/istio-ingressgateway     NodePort    10.101.212.170   <none>        80:31380/TCP,443:31390/TCP,31400:31400/TCP,15011:31814/TCP,8060:31435/TCP,853:31471/TCP,15030:30210/TCP,15031:30498/TCP   15m   app=istio-ingressgateway,istio=ingressgateway
-service/istio-pilot              ClusterIP   10.96.34.157     <none>        15010/TCP,15011/TCP,8080/TCP,9093/TCP                                                                                     15m   istio=pilot
-service/istio-policy             ClusterIP   10.98.185.215    <none>        9091/TCP,15004/TCP,9093/TCP                                                                                               15m   istio-mixer-type=policy,istio=mixer
-service/istio-sidecar-injector   ClusterIP   10.97.47.179     <none>        443/TCP                                                                                                                   15m   istio=sidecar-injector
-service/istio-telemetry          ClusterIP   10.103.23.55     <none>        9091/TCP,15004/TCP,9093/TCP,42422/TCP                                                                                     15m   istio-mixer-type=telemetry,istio=mixer
-service/jaeger-agent             ClusterIP   None             <none>        5775/UDP,6831/UDP,6832/UDP                                                                                                15m   app=jaeger
-service/jaeger-collector         ClusterIP   10.110.10.174    <none>        14267/TCP,14268/TCP                                                                                                       15m   app=jaeger
-service/jaeger-query             ClusterIP   10.98.172.235    <none>        16686/TCP                                                                                                                 15m   app=jaeger
-service/kiali                    ClusterIP   10.111.114.225   <none>        20001/TCP                                                                                                                 15m   app=kiali
-service/prometheus               ClusterIP   10.111.132.151   <none>        9090/TCP                                                                                                                  15m   app=prometheus
-service/servicegraph             ClusterIP   10.109.59.250    <none>        8088/TCP                                                                                                                  15m   app=servicegraph
-service/tracing                  ClusterIP   10.96.59.251     <none>        80/TCP                                                                                                                    15m   app=jaeger
-service/zipkin                   ClusterIP   10.107.168.128   <none>        9411/TCP                                                                                                                  15m   app=jaeger
+NAME                                       READY   UP-TO-DATE   AVAILABLE   AGE     CONTAINERS           IMAGES             SELECTOR
+deployment.extensions/rook-ceph-operator   1/1     1            1           3m36s   rook-ceph-operator   rook/ceph:v0.9.2   app=rook-ceph-operator
 
-NAME                                           READY   UP-TO-DATE   AVAILABLE   AGE   CONTAINERS                 IMAGES                                                      SELECTOR
-deployment.extensions/grafana                  1/1     1            1           15m   grafana                    grafana/grafana:5.2.3                                       app=grafana
-deployment.extensions/istio-citadel            1/1     1            1           15m   citadel                    docker.io/istio/citadel:1.0.5                               istio=citadel
-deployment.extensions/istio-egressgateway      1/1     1            1           15m   istio-proxy                docker.io/istio/proxyv2:1.0.5                               app=istio-egressgateway,istio=egressgateway
-deployment.extensions/istio-galley             1/1     1            1           15m   validator                  docker.io/istio/galley:1.0.5                                istio=galley
-deployment.extensions/istio-ingressgateway     1/1     1            1           15m   istio-proxy                docker.io/istio/proxyv2:1.0.5                               app=istio-ingressgateway,istio=ingressgateway
-deployment.extensions/istio-pilot              1/1     1            1           15m   discovery,istio-proxy      docker.io/istio/pilot:1.0.5,docker.io/istio/proxyv2:1.0.5   app=pilot,istio=pilot
-deployment.extensions/istio-policy             1/1     1            1           15m   mixer,istio-proxy          docker.io/istio/mixer:1.0.5,docker.io/istio/proxyv2:1.0.5   app=policy,istio=mixer,istio-mixer-type=policy
-deployment.extensions/istio-sidecar-injector   1/1     1            1           15m   sidecar-injector-webhook   docker.io/istio/sidecar_injector:1.0.5                      istio=sidecar-injector
-deployment.extensions/istio-telemetry          1/1     1            1           15m   mixer,istio-proxy          docker.io/istio/mixer:1.0.5,docker.io/istio/proxyv2:1.0.5   app=telemetry,istio=mixer,istio-mixer-type=telemetry
-deployment.extensions/istio-tracing            1/1     1            1           15m   jaeger                     docker.io/jaegertracing/all-in-one:1.5                      app=jaeger
-deployment.extensions/kiali                    1/1     1            1           15m   kiali                      docker.io/kiali/kiali:v0.10                                 app=kiali
-deployment.extensions/prometheus               1/1     1            1           15m   prometheus                 docker.io/prom/prometheus:v2.3.1                            app=prometheus
-deployment.extensions/servicegraph             1/1     1            1           15m   servicegraph               docker.io/istio/servicegraph:1.0.5                          app=servicegraph
-
-NAME                                          READY   STATUS      RESTARTS   AGE   IP            NODE                             NOMINATED NODE   READINESS GATES
-pod/grafana-59b8896965-pmwd2                  1/1     Running     0          15m   10.244.1.16   pruzicka-k8s-istio-workshop-node03   <none>           <none>
-pod/istio-citadel-856f994c58-8r8nr            1/1     Running     0          15m   10.244.1.17   pruzicka-k8s-istio-workshop-node03   <none>           <none>
-pod/istio-egressgateway-5649fcf57-sv8wf       1/1     Running     0          15m   10.244.1.14   pruzicka-k8s-istio-workshop-node03   <none>           <none>
-pod/istio-galley-7665f65c9c-8sjmm             1/1     Running     0          15m   10.244.1.18   pruzicka-k8s-istio-workshop-node03   <none>           <none>
-pod/istio-grafana-post-install-kw74d          0/1     Completed   0          10m   10.244.1.19   pruzicka-k8s-istio-workshop-node03   <none>           <none>
-pod/istio-ingressgateway-6755b9bbf6-f7pnx     1/1     Running     0          15m   10.244.1.13   pruzicka-k8s-istio-workshop-node03   <none>           <none>
-pod/istio-pilot-56855d999b-6zq86              2/2     Running     0          15m   10.244.0.11   pruzicka-k8s-istio-workshop-node01   <none>           <none>
-pod/istio-policy-6fcb6d655f-4zndw             2/2     Running     0          15m   10.244.2.13   pruzicka-k8s-istio-workshop-node02   <none>           <none>
-pod/istio-sidecar-injector-768c79f7bf-74wbc   1/1     Running     0          15m   10.244.2.18   pruzicka-k8s-istio-workshop-node02   <none>           <none>
-pod/istio-telemetry-664d896cf5-smz7w          2/2     Running     0          15m   10.244.2.14   pruzicka-k8s-istio-workshop-node02   <none>           <none>
-pod/istio-tracing-6b994895fd-vb58q            1/1     Running     0          15m   10.244.2.17   pruzicka-k8s-istio-workshop-node02   <none>           <none>
-pod/kiali-67c69889b5-sw92h                    1/1     Running     0          15m   10.244.1.15   pruzicka-k8s-istio-workshop-node03   <none>           <none>
-pod/prometheus-76b7745b64-kwzj5               1/1     Running     0          15m   10.244.2.15   pruzicka-k8s-istio-workshop-node02   <none>           <none>
-pod/servicegraph-5c4485945b-j9bp2             1/1     Running     0          15m   10.244.2.16   pruzicka-k8s-istio-workshop-node02   <none>           <none>
+NAME                                      READY   STATUS    RESTARTS   AGE     IP               NODE                             NOMINATED NODE   READINESS GATES
+pod/rook-ceph-agent-2bxhq                 1/1     Running   0          2m14s   192.168.250.12   pruzicka-k8s-istio-workshop-node02   <none>           <none>
+pod/rook-ceph-agent-8h4p4                 1/1     Running   0          2m14s   192.168.250.11   pruzicka-k8s-istio-workshop-node01   <none>           <none>
+pod/rook-ceph-agent-mq69r                 1/1     Running   0          2m14s   192.168.250.13   pruzicka-k8s-istio-workshop-node03   <none>           <none>
+pod/rook-ceph-operator-7478c899b5-px2hc   1/1     Running   0          3m37s   10.244.2.3       pruzicka-k8s-istio-workshop-node02   <none>           <none>
+pod/rook-discover-8ffj8                   1/1     Running   0          2m14s   10.244.2.4       pruzicka-k8s-istio-workshop-node02   <none>           <none>
+pod/rook-discover-l56jj                   1/1     Running   0          2m14s   10.244.1.2       pruzicka-k8s-istio-workshop-node03   <none>           <none>
+pod/rook-discover-q9xwp                   1/1     Running   0          2m14s   10.244.0.4       pruzicka-k8s-istio-workshop-node01   <none>           <none>
 ```
 
-Configure Istio with a new log type and send those logs to the FluentD:
+Create your Rook cluster:
 
 ```bash
-kubectl apply -f ../../files/fluentd-istio.yaml
+kubectl create -f https://raw.githubusercontent.com/rook/rook/master/cluster/examples/kubernetes/ceph/cluster.yaml
+sleep 100
 ```
 
-Check + Enable Istio in default namespace.
-
-Let the default namespace to use Istio injection:
+Get the [Toolbox](https://rook.io/docs/rook/master/ceph-toolbox.html) with ceph commands:
 
 ```bash
-kubectl label namespace default istio-injection=enabled
+kubectl create -f https://raw.githubusercontent.com/rook/rook/master/cluster/examples/kubernetes/ceph/toolbox.yaml
+sleep 300
 ```
 
-Check namespaces:
+Check what was created in `rook-ceph` namespace:
 
 ```bash
-kubectl get namespace -L istio-injection
+kubectl get svc,deploy,po --namespace=rook-ceph -o wide
 ```
 
 Output:
 
 ```shell
-NAME               STATUS   AGE   ISTIO-INJECTION
-default            Active   70m   enabled
-es-operator        Active   41m
-istio-system       Active   16m
-kube-public        Active   70m
-kube-system        Active   70m
-logging            Active   38m
-rook-ceph          Active   59m
-rook-ceph-system   Active   63m
+NAME                              TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE     SELECTOR
+service/rook-ceph-mgr             ClusterIP   10.103.36.128   <none>        9283/TCP   8m45s   app=rook-ceph-mgr,rook_cluster=rook-ceph
+service/rook-ceph-mgr-dashboard   ClusterIP   10.99.173.58    <none>        8443/TCP   8m45s   app=rook-ceph-mgr,rook_cluster=rook-ceph
+service/rook-ceph-mon-a           ClusterIP   10.102.39.160   <none>        6790/TCP   12m     app=rook-ceph-mon,ceph_daemon_id=a,mon=a,mon_cluster=rook-ceph,rook_cluster=rook-ceph
+service/rook-ceph-mon-b           ClusterIP   10.102.49.137   <none>        6790/TCP   11m     app=rook-ceph-mon,ceph_daemon_id=b,mon=b,mon_cluster=rook-ceph,rook_cluster=rook-ceph
+service/rook-ceph-mon-c           ClusterIP   10.96.25.143    <none>        6790/TCP   10m     app=rook-ceph-mon,ceph_daemon_id=c,mon=c,mon_cluster=rook-ceph,rook_cluster=rook-ceph
+
+NAME                                    READY   UP-TO-DATE   AVAILABLE   AGE     CONTAINERS        IMAGES             SELECTOR
+deployment.extensions/rook-ceph-mgr-a   1/1     1            1           9m33s   mgr               ceph/ceph:v13      app=rook-ceph-mgr,ceph_daemon_id=a,instance=a,mgr=a,rook_cluster=rook-ceph
+deployment.extensions/rook-ceph-mon-a   1/1     1            1           12m     mon               ceph/ceph:v13      app=rook-ceph-mon,ceph_daemon_id=a,mon=a,mon_cluster=rook-ceph,rook_cluster=rook-ceph
+deployment.extensions/rook-ceph-mon-b   1/1     1            1           11m     mon               ceph/ceph:v13      app=rook-ceph-mon,ceph_daemon_id=b,mon=b,mon_cluster=rook-ceph,rook_cluster=rook-ceph
+deployment.extensions/rook-ceph-mon-c   1/1     1            1           10m     mon               ceph/ceph:v13      app=rook-ceph-mon,ceph_daemon_id=c,mon=c,mon_cluster=rook-ceph,rook_cluster=rook-ceph
+deployment.extensions/rook-ceph-osd-0   1/1     1            1           8m34s   osd               ceph/ceph:v13      app=rook-ceph-osd,ceph-osd-id=0,rook_cluster=rook-ceph
+deployment.extensions/rook-ceph-osd-1   1/1     1            1           8m33s   osd               ceph/ceph:v13      app=rook-ceph-osd,ceph-osd-id=1,rook_cluster=rook-ceph
+deployment.extensions/rook-ceph-osd-2   1/1     1            1           8m33s   osd               ceph/ceph:v13      app=rook-ceph-osd,ceph-osd-id=2,rook_cluster=rook-ceph
+deployment.extensions/rook-ceph-tools   1/1     1            1           12m     rook-ceph-tools   rook/ceph:master   app=rook-ceph-tools
+
+NAME                                                             READY   STATUS      RESTARTS   AGE     IP               NODE                             NOMINATED NODE   READINESS GATES
+pod/rook-ceph-mgr-a-669f5b47fc-sjvrr                             1/1     Running     0          9m33s   10.244.1.6       pruzicka-k8s-istio-workshop-node03   <none>           <none>
+pod/rook-ceph-mon-a-784f8fb5b6-zcvjr                             1/1     Running     0          12m     10.244.0.5       pruzicka-k8s-istio-workshop-node01   <none>           <none>
+pod/rook-ceph-mon-b-6dfbf486f4-2ktpm                             1/1     Running     0          11m     10.244.2.5       pruzicka-k8s-istio-workshop-node02   <none>           <none>
+pod/rook-ceph-mon-c-6c85f6f44-j5wwv                              1/1     Running     0          10m     10.244.1.5       pruzicka-k8s-istio-workshop-node03   <none>           <none>
+pod/rook-ceph-osd-0-6dd9cdc946-7th52                             1/1     Running     0          8m34s   10.244.1.8       pruzicka-k8s-istio-workshop-node03   <none>           <none>
+pod/rook-ceph-osd-1-64cdd77897-9vdrh                             1/1     Running     0          8m33s   10.244.2.7       pruzicka-k8s-istio-workshop-node02   <none>           <none>
+pod/rook-ceph-osd-2-67fcc446bd-skq52                             1/1     Running     0          8m33s   10.244.0.7       pruzicka-k8s-istio-workshop-node01   <none>           <none>
+pod/rook-ceph-osd-prepare-pruzicka-k8s-istio-workshop-node01-z29hj   0/2     Completed   0          8m39s   10.244.0.6       pruzicka-k8s-istio-workshop-node01   <none>           <none>
+pod/rook-ceph-osd-prepare-pruzicka-k8s-istio-workshop-node02-q8xqx   0/2     Completed   0          8m39s   10.244.2.6       pruzicka-k8s-istio-workshop-node02   <none>           <none>
+pod/rook-ceph-osd-prepare-pruzicka-k8s-istio-workshop-node03-vbwxv   0/2     Completed   0          8m39s   10.244.1.7       pruzicka-k8s-istio-workshop-node03   <none>           <none>
+pod/rook-ceph-tools-76c7d559b6-s6s4l                             1/1     Running     0          12m     192.168.250.12   pruzicka-k8s-istio-workshop-node02   <none>           <none>
 ```
 
-Configure port forwarding for Istio services:
+Create a storage class based on the Ceph RBD volume plugin:
 
 ```bash
-# Jaeger - http://localhost:16686
-kubectl port-forward -n istio-system $(kubectl get pod -n istio-system -l app=jaeger -o jsonpath="{.items[0].metadata.name}") 16686:16686 &
+kubectl create -f https://raw.githubusercontent.com/rook/rook/master/cluster/examples/kubernetes/ceph/storageclass.yaml
+sleep 10
+```
 
-# Prometheus - http://localhost:9090/graph
-kubectl -n istio-system port-forward $(kubectl -n istio-system get pod -l app=prometheus -o jsonpath="{.items[0].metadata.name}") 9090:9090 &
+Set `rook-ceph-block` as default Storage Class:
 
-# Grafana - http://localhost:3000/dashboard/db/istio-mesh-dashboard
-kubectl -n istio-system port-forward $(kubectl -n istio-system get pod -l app=grafana -o jsonpath="{.items[0].metadata.name}") 3000:3000 &
+```bash
+kubectl patch storageclass rook-ceph-block -p "{\"metadata\": {\"annotations\":{\"storageclass.kubernetes.io/is-default-class\":\"true\"}}}"
+```
 
-# Kiali - http://localhost:20001
-kubectl -n istio-system port-forward $(kubectl -n istio-system get pod -l app=kiali -o jsonpath="{.items[0].metadata.name}") 20001:20001 &
+Check the Storage Classes:
 
-# Servicegraph - http://localhost:8088/force/forcegraph.html
-kubectl -n istio-system port-forward $(kubectl -n istio-system get pod -l app=servicegraph -o jsonpath="{.items[0].metadata.name}") 8088:8088 &
+```bash
+kubectl describe storageclass
+```
+
+Output:
+
+```shell
+Name:                  rook-ceph-block
+IsDefaultClass:        Yes
+Annotations:           storageclass.kubernetes.io/is-default-class=true
+Provisioner:           ceph.rook.io/block
+Parameters:            blockPool=replicapool,clusterNamespace=rook-ceph,fstype=xfs
+AllowVolumeExpansion:  <unset>
+MountOptions:          <none>
+ReclaimPolicy:         Delete
+VolumeBindingMode:     Immediate
+Events:                <none>
+```
+
+See the CephBlockPool:
+
+```bash
+kubectl describe cephblockpool --namespace=rook-ceph
+```
+
+Output:
+
+```shell
+Name:         replicapool
+Namespace:    rook-ceph
+Labels:       <none>
+Annotations:  <none>
+API Version:  ceph.rook.io/v1
+Kind:         CephBlockPool
+Metadata:
+  Creation Timestamp:  2019-02-04T09:51:55Z
+  Generation:          1
+  Resource Version:    3171
+  Self Link:           /apis/ceph.rook.io/v1/namespaces/rook-ceph/cephblockpools/replicapool
+  UID:                 8163367d-2862-11e9-a470-fa163e90237a
+Spec:
+  Replicated:
+    Size:  1
+Events:    <none>
+```
+
+Check the status of your Ceph installation:
+
+```bash
+kubectl -n rook-ceph exec $(kubectl -n rook-ceph get pod -l "app=rook-ceph-tools" -o jsonpath="{.items[0].metadata.name}") -- ceph status
+```
+
+Output:
+
+```shell
+  cluster:
+    id:     1f4458a6-f574-4e6c-8a25-5a5eef6eb0a7
+    health: HEALTH_OK
+
+  services:
+    mon: 3 daemons, quorum c,a,b
+    mgr: a(active)
+    osd: 3 osds: 3 up, 3 in
+
+  data:
+    pools:   1 pools, 100 pgs
+    objects: 0  objects, 0 B
+    usage:   13 GiB used, 44 GiB / 58 GiB avail
+    pgs:     100 active+clean
+```
+
+Ceph status:
+
+```bash
+kubectl -n rook-ceph exec $(kubectl -n rook-ceph get pod -l "app=rook-ceph-tools" -o jsonpath="{.items[0].metadata.name}") -- ceph osd status
+```
+
+Output:
+
+```shell
++----+--------------------------------+-------+-------+--------+---------+--------+---------+-----------+
+| id |              host              |  used | avail | wr ops | wr data | rd ops | rd data |   state   |
++----+--------------------------------+-------+-------+--------+---------+--------+---------+-----------+
+| 0  | pruzicka-k8s-istio-workshop-node03 | 4302M | 15.0G |    0   |     0   |    0   |     0   | exists,up |
+| 1  | pruzicka-k8s-istio-workshop-node02 | 4455M | 14.8G |    0   |     0   |    0   |     0   | exists,up |
+| 2  | pruzicka-k8s-istio-workshop-node01 | 4948M | 14.3G |    0   |     0   |    0   |     0   | exists,up |
++----+--------------------------------+-------+-------+--------+---------+--------+---------+-----------+
+```
+
+Check the cluster usage status:
+
+```bash
+kubectl -n rook-ceph exec $(kubectl -n rook-ceph get pod -l "app=rook-ceph-tools" -o jsonpath="{.items[0].metadata.name}") -- ceph df
+```
+
+Output:
+
+```shell
+GLOBAL:
+    SIZE       AVAIL      RAW USED     %RAW USED
+    58 GiB     44 GiB       13 GiB         23.22
+POOLS:
+    NAME            ID     USED     %USED     MAX AVAIL     OBJECTS
+    replicapool     1       0 B         0        40 GiB           0
 ```

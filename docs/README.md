@@ -11,6 +11,7 @@ and observe what exactly is going on with your services.
 ## Requirements
 
 * [Docker](https://www.docker.com/)
+* Access to OpenStack environment to provision 3 VMs
 
 ## Objectives
 
@@ -30,12 +31,18 @@ After you complete this course, you'll be able to:
 
 You will perform the following exercises in the lab:
 
-* [Lab 1 - Create VMs in OpenStack](lab-01/README.md)
-* [Lab 2 - Install Kubernetes to the VMs](lab-02/README.md)
-* [Lab 3 - Install Helm, Rook and ElasticSearch](lab-03/README.md)
-* [Lab 4 - Install Istio](lab-04/README.md)
-* [Lab 5 - Istio example](lab-05/README.md)
-* [Lab 6 - Cleanup](lab-06/README.md)
+* [Lab 01 - Create VMs in OpenStack](lab-01/README.md)
+* [Lab 02 - Install Kubernetes to the VMs](lab-02/README.md)
+* [Lab 03 - Install Helm](lab-03/README.md)
+* [Lab 04 - Install Rook](lab-04/README.md)
+* [Lab 05 - Install ElasticSearch](lab-05/README.md)
+* [Lab 06 - Istio - Installation](lab-06/README.md)
+* [Lab 07 - Istio - Bookinfo Application](lab-07/README.md)
+* [Lab 08 - Istio - Configuring Request Routing](lab-08/README.md)
+* [Lab 09 - Istio - Injecting an HTTP delay fault](lab-09/README.md)
+* [Lab 10 - Istio - Weight-based routing](lab-10/README.md)
+* [Lab 11 - Istio - Mirroring](lab-11/README.md)
+* [Lab 12 - Istio - Cleanup](lab-12/README.md)
 
 ::: tip
 In case you turned off the servers or restart your computer please verify you

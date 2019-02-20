@@ -41,7 +41,7 @@ clear
 # git clone https://github.com/ruzickap/k8s-istio-workshop && cd k8s-istio-workshop
 # ./run-k8s-istio-workshop.sh
 
-sed -n '/^Install necessary software into the Docker container:$/,$p' docs/lab-0{1..6}/README.md | \
+sed -n '/^Install necessary software into the Docker container:$/,$p' docs/lab-{01..12}/README.md | \
 sed -n '/^```bash$/,/^```$/p;/^-----$/p'  | \
 sed -e 's/^-----$/\
 p  ""\
