@@ -15,7 +15,7 @@ Install ElasticSearch operator:
 
 ```bash
 helm install --wait --name elasticsearch-operator es-operator/elasticsearch-operator --set rbac.enabled=True --namespace es-operator
-sleep 50
+sleep 20
 ```
 
 Check how the operator looks like:
@@ -42,7 +42,7 @@ helm install --wait --name=elasticsearch --namespace logging es-operator/elastic
   --set cerebro.enabled=true \
   --set storage.class=rook-ceph-block \
   --set clientReplicas=1,masterReplicas=1,dataReplicas=1
-sleep 350
+sleep 120
 ```
 
 Show ElasticSearch components:

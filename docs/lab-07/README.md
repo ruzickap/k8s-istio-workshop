@@ -38,7 +38,7 @@ Deploy the demo of [Bookinfo](https://istio.io/docs/examples/bookinfo/) applicat
 
 ```bash
 kubectl apply -f samples/bookinfo/platform/kube/bookinfo.yaml
-sleep 400
+sleep 200
 ```
 
 -----

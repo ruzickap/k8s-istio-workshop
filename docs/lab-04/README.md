@@ -9,7 +9,7 @@ Install [Rook](https://rook.io/) Operator
 ```bash
 helm repo add rook-stable https://charts.rook.io/stable
 helm install --wait --name rook-ceph --namespace rook-ceph-system rook-stable/rook-ceph
-sleep 110
+sleep 40
 ```
 
 See how the rook-ceph-system should look like:
@@ -38,14 +38,13 @@ Create your Rook cluster:
 
 ```bash
 kubectl create -f https://raw.githubusercontent.com/rook/rook/master/cluster/examples/kubernetes/ceph/cluster.yaml
-sleep 100
 ```
 
 Get the [Toolbox](https://rook.io/docs/rook/master/ceph-toolbox.html) with ceph commands:
 
 ```bash
 kubectl create -f https://raw.githubusercontent.com/rook/rook/master/cluster/examples/kubernetes/ceph/toolbox.yaml
-sleep 300
+sleep 240
 ```
 
 Check what was created in `rook-ceph` namespace:
@@ -92,7 +91,7 @@ Create a storage class based on the Ceph RBD volume plugin:
 
 ```bash
 kubectl create -f https://raw.githubusercontent.com/rook/rook/master/cluster/examples/kubernetes/ceph/storageclass.yaml
-sleep 10
+sleep 5
 ```
 
 Set `rook-ceph-block` as default Storage Class:
