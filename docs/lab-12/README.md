@@ -9,3 +9,9 @@ killall kubectl siege
 sed -i "/read NAMESPACE/d" ./samples/bookinfo/platform/kube/cleanup.sh
 ./samples/bookinfo/platform/kube/cleanup.sh
 ```
+
+To remove your VMs from Openstack, please run:
+
+```shell
+terraform destroy -auto-approve -var-file=../../terrafrom/openstack/terraform.tfvars ../../terrafrom/openstack
+```

@@ -234,7 +234,7 @@ To access the Ceph Dashboard [https://localhost:8443](https://localhost:8443)
 use username `admin` and password can be found by running:
 
 ```bash
-kubectl -n rook-ceph get secret rook-ceph-dashboard-password -o yaml | grep "password:" | awk '{print $2}' | base64 --decode
+kubectl -n rook-ceph get secret rook-ceph-dashboard-password -o yaml | grep "password:" | awk "{print \$2}" | base64 --decode
 ```
 
 Ceph Dashboard ([https://localhost:8443](https://localhost:8443)):

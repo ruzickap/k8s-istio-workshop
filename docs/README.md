@@ -10,8 +10,16 @@ and observe what exactly is going on with your services.
 
 ## Requirements
 
+* Linux Desktop - like [Ubuntu](https://www.ubuntu.com/download/desktop),
+  [Fedora](https://getfedora.org/), [Debian](https://www.debian.org/)
 * [Docker](https://www.docker.com/)
 * Access to OpenStack environment to provision 3 VMs
+
+::: warning
+If you have a MacOS, please install Firefox, Git, jq, kubectl, siege, Terraform,
+unzip yourself and start from [Lab 01 - Create VMs in OpenStack](lab-01/README.md)
+section "Provision VMs in OpenStack".
+:::
 
 ## Objectives
 
@@ -46,7 +54,7 @@ You will perform the following exercises in the lab:
 
 ::: tip
 In case you turned off the servers or restart your computer please verify you
-have the following up and running:
+have the `KUBECONFIG` variable set and all `kubectl port-forward` up and running:
 :::
 
 ```bash

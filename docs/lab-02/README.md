@@ -28,7 +28,7 @@ pruzicka-k8s-istio-workshop-node03   Ready    <none>   50s   v1.13.3   192.168.2
 
 View services, deployments, and pods:
 
-``` bash
+```bash
 kubectl get svc,deploy,po --all-namespaces -o wide
 ```
 
