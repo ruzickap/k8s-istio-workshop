@@ -213,14 +213,21 @@ Change listening port of Ceph Dashboard ([https://github.com/rook/rook/issues/25
 
 ```bash
 kubectl -n rook-ceph exec -it $(kubectl -n rook-ceph get pod -l "app=rook-ceph-tools" -o jsonpath='{.items[0].metadata.name}') -- ceph config set mgr mgr/dashboard/server_addr 0.0.0.0
-
+sleep 5
 kubectl delete pod -n rook-ceph  $(kubectl -n rook-ceph get pod -l app=rook-ceph-mgr -o jsonpath="{.items[0].metadata.name}")
+sleep 5
 ```
 
 Establish port forwarding:
 
 ```bash
 kubectl -n rook-ceph port-forward $(kubectl -n rook-ceph get pod -l app=rook-ceph-mgr -o jsonpath="{.items[0].metadata.name}") 8443:8443 &
+```
+
+Run firefox inside docker container:
+
+```shell
+firefox &
 ```
 
 To access the Ceph Dashboard [https://localhost:8443](https://localhost:8443)

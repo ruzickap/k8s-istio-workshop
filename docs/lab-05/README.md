@@ -103,12 +103,6 @@ kubectl -n logging port-forward $(kubectl -n logging get pod -l role=kibana -o j
 
 Configure ElasticSearch:
 
-Run firefox inside docker container:
-
-```shell
-firefox &
-```
-
 * Navigate to the [Kibana UI](https://localhost:5601) ([https://localhost:5601](https://localhost:5601))
   and click the **Set up index patterns** in the top right.
 * Use `*` as the **index pattern**, and click **Next step**.
