@@ -52,6 +52,7 @@ jobs:
       addons:
         apt:
           packages:
+            - pv
             - siege
       services:
         - docker
