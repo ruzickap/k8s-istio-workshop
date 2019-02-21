@@ -1,7 +1,7 @@
 # Istio - Cleanup
 
-* Remove the Bookinfo application and clean it up (delete the routing rules
-  and terminate the application pods):
+Remove the Bookinfo application and clean it up (delete the routing rules
+and terminate the application pods):
 
 ```bash
 # Clean everything - remove port-forward, Bookinfo application, all Istio VirtualServices, Gateways, DestinationRules

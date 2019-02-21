@@ -11,7 +11,7 @@ version.
 
 Route a percentage of traffic to one service or another - send **%50**
 of traffic to `reviews:v1` and **%50** to `reviews:v3` and finally complete
-the migration by sending %100 of traffic to `reviews:v3`.
+the migration by sending **%100** of traffic to `reviews:v3`.
 
 Route all traffic to the `reviews:v1` version of each microservice:
 
@@ -19,7 +19,7 @@ Route all traffic to the `reviews:v1` version of each microservice:
 kubectl apply -f samples/bookinfo/networking/virtual-service-all-v1.yaml
 ```
 
-Transfer 50% of the traffic from `reviews:v1` to `reviews:v3`:
+Transfer **50%** of the traffic from `reviews:v1` to `reviews:v3`:
 
 ```bash
 kubectl apply -f samples/bookinfo/networking/virtual-service-reviews-50-v3.yaml
@@ -54,10 +54,10 @@ spec:
       weight: 50
 ```
 
-* Refresh the `/productpage` in your browser and you now see **red** colored
-  star ratings approximately **50%** of the time.
+Refresh the `/productpage` in your browser and you now see
+**red colored star** ratings approximately **50%** of the time.
 
-* Check the flows in Kiali graph
+Check the flows in Kiali graph, where only `reviews:{v1,v2}` are used:
 
 ![Weight-based routing Kiali Graph](./istio_kiali_weight-based_routing.gif
 "Weight-based routing Kiali Graph")
@@ -71,9 +71,14 @@ route **100%** of the traffic to `reviews:v3` by applying this virtual service.
 kubectl apply -f samples/bookinfo/networking/virtual-service-reviews-v3.yaml
 ```
 
-* When you refresh the `/productpage` you will always see book reviews
-  with **red** colored star ratings for **each** review.
+When you refresh the `/productpage` you will always see book reviews
+with **red colored star** ratings for **each** review.
 
 ![Bookinfo v3](./bookinfo_v3.jpg "Bookinfo v3")
+
+Kiali graph:
+
+![Kiali - Bookinfo v3](./istio_kiali_weight-based_routing-bookinfo_v3.gif
+"Kiali - Bookinfo v3")
 
 -----

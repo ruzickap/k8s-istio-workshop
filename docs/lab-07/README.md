@@ -81,11 +81,48 @@ pod/reviews-v3-c995979bc-wcql9            2/2     Running   0          4m18s   1
 
 Check the container details - you should see also container `istio-proxy` next
 to `productpage`.
-The `kubectl logs` command will show you the output of the envoy proxy.
 
 ```bash
 kubectl describe pod -l app=productpage
+```
+
+Output:
+
+```shell
+...
+Containers:
+  productpage:
+    Container ID:   docker://09597863ee7cdde548ddc1fe1990eed0fea4c28ca7d7a0aedc58af6918edafd6
+    Image:          istio/examples-bookinfo-productpage-v1:1.8.0
+...
+  istio-proxy:
+    Container ID:  docker://7c411ca50317c307ac326e3dd27a598ff4fd00e53206f15acd8debf5e7b319d8
+    Image:         docker.io/istio/proxyv2:1.0.5
+...
+```
+
+The `kubectl logs` command will show you the output of the envoy proxy:
+
+```bash
 kubectl logs $(kubectl get pod -l app=productpage -o jsonpath="{.items[0].metadata.name}") istio-proxy
+```
+
+Output:
+
+```shell
+2019-02-21T08:23:21.009428Z     info    Version root@6f6ea1061f2b-docker.io/istio-1.0.5-c1707e45e71c75d74bf3a5dec8c7086f32f32fad-Clean
+2019-02-21T08:23:21.009468Z     info    Proxy role: model.Proxy{ClusterID:"", Type:"sidecar", IPAddress:"10.244.0.14", ID:"productpage-v1-54d799c966-vbm6k.default", Domain:"default.svc.cluster.local", Metadata:map[string]string(nil)}
+2019-02-21T08:23:21.009751Z     info    Effective config: binaryPath: /usr/local/bin/envoy
+configPath: /etc/istio/proxy
+connectTimeout: 10s
+discoveryAddress: istio-pilot.istio-system:15007
+discoveryRefreshDelay: 1s
+drainDuration: 45s
+parentShutdownDuration: 60s
+proxyAdminPort: 15000
+serviceCluster: productpage
+zipkinAddress: zipkin.istio-system:9411
+...
 ```
 
 Define the [Istio gateway](https://istio.io/docs/reference/config/istio.networking.v1alpha3/#Gateway)
@@ -97,7 +134,51 @@ kubectl apply -f samples/bookinfo/networking/bookinfo-gateway.yaml
 sleep 5
 ```
 
-Confirm the gateway has been created:
+Output:
+
+```shell
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: bookinfo-gateway
+spec:
+  selector:
+    istio: ingressgateway # use istio default controller
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "*"
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: bookinfo
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - bookinfo-gateway
+  http:
+  - match:
+    - uri:
+        exact: /productpage
+    - uri:
+        exact: /login
+    - uri:
+        exact: /logout
+    - uri:
+        prefix: /api/v1/products
+    route:
+    - destination:
+        host: productpage
+        port:
+          number: 9080
+```
+
+Confirm the gateway and virtualsevice has been created:
 
 ```bash
 kubectl get gateway,virtualservice
@@ -159,6 +240,31 @@ Display the destination rules:
 kubectl get destinationrules -o yaml
 ```
 
+Output:
+
+```shell
+...
+- apiVersion: networking.istio.io/v1alpha3
+  kind: DestinationRule
+...
+    name: reviews
+    namespace: default
+...
+  spec:
+    host: reviews
+    subsets:
+    - labels:
+        version: v1
+      name: v1
+    - labels:
+        version: v2
+      name: v2
+    - labels:
+        version: v3
+      name: v3
+...
+```
+
 Generate some traffic for next 5 minutes to gether some data:
 
 ```bash
@@ -169,31 +275,31 @@ Open the browser with these pages:
 
 * Servicegraph:
 
-  [http://localhost:8088/force/forcegraph.html](http://localhost:8088/force/forcegraph.html)
+  * [http://localhost:8088/force/forcegraph.html](http://localhost:8088/force/forcegraph.html)
 
-  [http://localhost:8088/dotviz](http://localhost:8088/dotviz)
+  * [http://localhost:8088/dotviz](http://localhost:8088/dotviz)
 
 * [Kiali](https://www.kiali.io/):
 
-  [http://localhost:20001](http://localhost:20001) (admin/admin)
+  * [http://localhost:20001](http://localhost:20001) (admin/admin)
 
 * [Jaeger](https://www.jaegertracing.io/):
 
-  [http://localhost:16686](http://localhost:16686)
+  * [http://localhost:16686](http://localhost:16686)
 
 * [Prometheus](https://prometheus.io/):
 
-  [http://localhost:9090/graph](http://localhost:9090/graph)
+  * [http://localhost:9090/graph](http://localhost:9090/graph)
 
 * [Kibana](https://www.elastic.co/products/kibana):
 
-  [https://localhost:5601/app/kibana](https://localhost:5601/app/kibana)
+  * [https://localhost:5601/app/kibana](https://localhost:5601/app/kibana)
 
 * [Grafana](https://grafana.com/):
 
-  [http://localhost:3000](http://localhost:3000) (Grafana -> Home -> Istio ->
-  Istio Performance Dashboard, Istio Service Dashboard,
-  Istio Workload Dashboard)
+  * [http://localhost:3000](http://localhost:3000) (Grafana -> Home -> Istio ->
+    Istio Performance Dashboard, Istio Service Dashboard,
+    Istio Workload Dashboard)
 
 Open the Bookinfo site in your browser `http://$GATEWAY_URL/productpage`
 and refresh the page several times - you should see different versions
@@ -203,7 +309,7 @@ the version routing.
 
 ![Bookinfo v1, v3, v2](./bookinfo_v1_v3_v2.gif "Bookinfo v1, v3, v2")
 
-* Check the flows in [Kiali](https://www.kiali.io/) graph
+Check the flows in [Kiali](https://www.kiali.io/) graph:
 
 ![Istio Graph](./istio_kiali_graph.gif "Istio Graph")
 
