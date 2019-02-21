@@ -71,7 +71,7 @@ echo "# Copy the kubeconfig to the local machine and get some basic details abou
 ssh ${SSH_ARGS} ${MYUSER}@${NODE_IP[0]} "cat ~/.kube/config" | sed "s@    server: https://.*@    server: https://${NODE_IP[0]}:6443@" > kubeconfig.conf
 
 export KUBECONFIG=$PWD/kubeconfig.conf
-kubectl get nodes
+kubectl get nodes -o wide
 
 echo "*** Allow pods to be scheduled on the masters"
 kubectl taint nodes --all node-role.kubernetes.io/master-
@@ -80,5 +80,5 @@ cat << \EOF
 *** Wait few minutes for the worker nodes to join..."
 *** Start with:
 export KUBECONFIG=$PWD/kubeconfig.conf
-kubectl get nodes
+kubectl get nodes -o wide
 EOF
