@@ -33,3 +33,5 @@ Output:
 NAMESPACE     NAME                            READY   STATUS    RESTARTS   AGE
 kube-system   tiller-deploy-dbb85cb99-z4c47   1/1     Running   0          28s
 ```
+
+![Helm](https://helm.sh/src/img/helm-logo.svg "Helm")
