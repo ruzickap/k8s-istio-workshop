@@ -10,7 +10,7 @@ Either download Istio directly from [https://github.com/istio/istio/releases](ht
 or get the latest version by using curl:
 
 ```bash
-export ISTIO_VERSION="1.0.5"
+export ISTIO_VERSION="1.0.6"
 test -d tmp || mkdir tmp
 cd tmp
 curl -sL https://git.io/getLatestIstio | sh -
@@ -26,6 +26,34 @@ Install `istioctl`:
 
 ```bash
 sudo mv bin/istioctl /usr/local/bin/
+```
+
+Define the credentials you want to use as the Kiali username and passphrase (admin/admin):
+
+```bash
+export KIALI_USERNAME=$(echo -n "admin" | base64)
+export KIALI_PASSPHRASE=$(echo -n "admin" | base64)
+```
+
+Create the namespace and secret:
+
+```bash
+NAMESPACE=istio-system
+kubectl create namespace $NAMESPACE
+
+cat << EOF | kubectl apply -f -
+apiVersion: v1
+kind: Secret
+metadata:
+  name: kiali
+  namespace: $NAMESPACE
+  labels:
+    app: kiali
+type: Opaque
+data:
+  username: $KIALI_USERNAME
+  passphrase: $KIALI_PASSPHRASE
+EOF
 ```
 
 Install [Istio](https://istio.io/) using Helm:
