@@ -83,6 +83,8 @@ elasticsearchcluster.enterprises.upmc.com/elasticsearch-cluster   18m
 
 ## Install [FluentBit](https://fluentbit.io/)
 
+![Fluent Bit](https://fluentbit.io/assets/img/logo1-default.png "Fluent Bit")
+
 ```bash
 # https://github.com/fluent/fluent-bit/issues/628
 helm install --wait stable/fluent-bit --name=fluent-bit --namespace=logging \
@@ -139,3 +141,6 @@ Kibana ([https://localhost:5601](https://localhost:5601)):
 Cerebro ([https://localhost:9000](https://localhost:9000)):
 
 ![Kibana](./kibana.png "Kibana")
+
+![ElasticSearch](https://static-www.elastic.co/assets/blteb1c97719574938d/logo-elastic-elasticsearch-lt.svg
+"ElasticSearch")

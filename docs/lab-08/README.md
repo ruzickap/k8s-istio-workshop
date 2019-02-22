@@ -163,3 +163,5 @@ You can do the same with `user-agent header` or `URI` for example:
         prefix: /api/v1
   ...
 ```
+
+![Istio](../lab-06/istio.svg "Istio")

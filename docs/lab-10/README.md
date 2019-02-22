@@ -82,3 +82,5 @@ Kiali graph:
 "Kiali - Bookinfo v3")
 
 -----
+
+![Istio](../lab-06/istio.svg "Istio")

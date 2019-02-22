@@ -15,3 +15,5 @@ To remove your VMs from Openstack, please run:
 ```shell
 terraform destroy -auto-approve -var-file=../../terrafrom/openstack/terraform.tfvars ../../terrafrom/openstack
 ```
+
+![Istio](../lab-06/istio.svg "Istio")

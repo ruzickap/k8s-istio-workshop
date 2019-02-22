@@ -169,3 +169,5 @@ spec:
 ```
 
 -----
+
+![Istio](../lab-06/istio.svg "Istio")

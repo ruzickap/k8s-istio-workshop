@@ -314,3 +314,5 @@ Check the flows in [Kiali](https://www.kiali.io/) graph:
 ![Istio Graph](./istio_kiali_graph.gif "Istio Graph")
 
 -----
+
+![Istio](../lab-06/istio.svg "Istio")

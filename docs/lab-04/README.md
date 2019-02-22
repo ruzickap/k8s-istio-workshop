@@ -239,3 +239,5 @@ kubectl -n rook-ceph get secret rook-ceph-dashboard-password -o yaml | grep "pas
 Ceph Dashboard ([https://localhost:8443](https://localhost:8443)):
 
 ![Ceph Dashboard](./ceph_dashboard.png "Ceph Dashboard")
+
+![Rook](https://landscape.cncf.io/logos/rook.svg "Rook")

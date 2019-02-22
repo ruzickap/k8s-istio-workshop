@@ -70,3 +70,5 @@ Check the flows in Kiali graph
 ![Mirroring Kiali Graph](./istio_kiali_mirroring.gif "Mirroring Kiali Graph")
 
 -----
+
+![Istio](../lab-06/istio.svg "Istio")
