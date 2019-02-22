@@ -2,12 +2,16 @@ module.exports = {
   title: "Istio Workshop",
   description: "Istio workshop running on OpenStack",
   base: '/k8s-istio-workshop/',
+  head: [
+    ['link', { rel: "icon", href: "favicon.ico" }]
+  ],
   themeConfig: {
     displayAllHeaders: true,
     lastUpdated: true,
     repo: 'ruzickap/k8s-istio-workshop',
     docsDir: 'docs',
     editLinks: true,
+    logo: 'istio.svg',
     nav: [
       { text: 'Home', link: '/' },
       {
