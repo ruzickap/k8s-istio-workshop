@@ -11,7 +11,7 @@ module.exports = {
     repo: 'ruzickap/k8s-istio-workshop',
     docsDir: 'docs',
     editLinks: true,
-    logo: 'istio.svg',
+    logo: '/istio.svg',
     nav: [
       { text: 'Home', link: '/' },
       {

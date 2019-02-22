@@ -240,4 +240,5 @@ Ceph Dashboard ([https://localhost:8443](https://localhost:8443)):
 
 ![Ceph Dashboard](./ceph_dashboard.png "Ceph Dashboard")
 
-![Rook](https://landscape.cncf.io/logos/rook.svg "Rook")
+![Rook](https://raw.githubusercontent.com/rook/rook.github.io/master/images/logos/rook/rook-logo-color-on-transparent.png
+"Rook")

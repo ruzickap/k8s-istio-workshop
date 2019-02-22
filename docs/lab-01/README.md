@@ -3,6 +3,9 @@
 Before you start with the main content of the workshop, you need to provision
 the VMs in OpenStack.
 
+![Openstack](https://www.openstack.org/themes/openstack/images/openstack-logo/2016R/OpenStack-Logo-Horizontal.SVG
+"Openstack")
+
 Create VMs in OpenStack using Ubuntu Docker image.
 
 ## Prepare the local working environment inside Docker
@@ -126,3 +129,6 @@ vms_public_ip = [
 
 At the end of the output you should see 3 IP addresses which
 should be accessible by ssh using your public key `~/.ssh/id_rsa.pub`.
+
+![Terraform](https://www.terraform.io/assets/images/logo-text-8c3ba8a6.svg
+"Terraform")
