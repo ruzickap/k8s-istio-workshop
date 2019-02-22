@@ -38,7 +38,7 @@ Deploy the demo of [Bookinfo](https://istio.io/docs/examples/bookinfo/) applicat
 
 ```bash
 kubectl apply -f samples/bookinfo/platform/kube/bookinfo.yaml
-sleep 200
+sleep 300
 ```
 
 -----
@@ -315,4 +315,4 @@ Check the flows in [Kiali](https://www.kiali.io/) graph:
 
 -----
 
-![Istio](../lab-06/istio.svg "Istio")
+![Istio](../.vuepress/public/istio.svg "Istio")

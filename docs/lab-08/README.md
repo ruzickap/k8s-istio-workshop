@@ -164,4 +164,4 @@ You can do the same with `user-agent header` or `URI` for example:
   ...
 ```
 
-![Istio](../lab-06/istio.svg "Istio")
+![Istio](../.vuepress/public/istio.svg "Istio")

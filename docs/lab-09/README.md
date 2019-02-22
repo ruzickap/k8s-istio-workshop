@@ -170,4 +170,4 @@ spec:
 
 -----
 
-![Istio](../lab-06/istio.svg "Istio")
+![Istio](../.vuepress/public/istio.svg "Istio")

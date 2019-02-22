@@ -71,4 +71,4 @@ Check the flows in Kiali graph
 
 -----
 
-![Istio](../lab-06/istio.svg "Istio")
+![Istio](../.vuepress/public/istio.svg "Istio")
