@@ -1,10 +1,9 @@
 # Istio - Installation
 
-* Istio architectue
+Istio architectue
 
-  ![Istio Architecture](https://istio.io/docs/concepts/what-is-istio/arch.svg
-  "Istio Architecture")
-  ([https://istio.io/docs/concepts/what-is-istio/](https://istio.io/docs/concepts/what-is-istio/))
+![Istio Architecture](https://istio.io/docs/concepts/what-is-istio/arch.svg
+"Istio Architecture")
 
 Either download Istio directly from [https://github.com/istio/istio/releases](https://github.com/istio/istio/releases)
 or get the latest version by using curl:

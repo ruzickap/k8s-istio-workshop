@@ -1,8 +1,7 @@
 # Install ElasticSearch and Kibana
 
-![Kubernetes + ELK](https://cdn-images-1.medium.com/max/1200/1*779CspzO_Tgeyywv5z8nag.jpeg
-"Kubernetes + ELK")
-([https://medium.com/@FedakV/deployment-of-full-scale-elk-stack-to-kubernetes-it-svit-devops-solution-8de9516f96a7](https://medium.com/@FedakV/deployment-of-full-scale-elk-stack-to-kubernetes-it-svit-devops-solution-8de9516f96a7))
+![ElasticSearch](https://www.elastic.co/assets/blt2eb18ce156daade6/heart.svg
+"ElasticSearch")
 
 Add [ElasticSearch operator](https://github.com/upmc-enterprises/elasticsearch-operator)
 to Helm:

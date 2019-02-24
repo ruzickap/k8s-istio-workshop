@@ -4,6 +4,8 @@
 and observe microservices, also known as a service mesh, on cloud platforms
 such as Kubernetes.
 
+![Istio](https://www.vectorlogo.zone/logos/istioio/istioio-ar21.svg "Istio")
+
 With Istio, you can manage network traffic, load balance across microservices,
 enforce access policies, verify service identity, secure service communication,
 and observe what exactly is going on with your services.
@@ -17,8 +19,8 @@ and observe what exactly is going on with your services.
 
 ::: warning
 If you have a MacOS, please install Firefox, Git, jq, kubectl, siege, Terraform,
-unzip yourself and start from [Lab 01 - Create VMs in OpenStack](lab-01/README.md)
-section "Provision VMs in OpenStack".
+unzip yourself and start from [Lab 01 - Create VMs in OpenStack / Provision VMs
+in OpenStack](lab-01/README.md#provision-vms-in-openstack).
 :::
 
 ## Objectives

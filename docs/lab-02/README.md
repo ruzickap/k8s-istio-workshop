@@ -57,4 +57,5 @@ kube-system   pod/kube-proxy-w4tbd                                         1/1  
 kube-system   pod/kube-scheduler-pruzicka-k8s-istio-workshop-node01            1/1     Running   0          78s    192.168.250.11   pruzicka-k8s-istio-workshop-node01   <none>           <none>
 ```
 
-![containerd](https://containerd.io/img/logos/footer-logo.png "containerd")
+![Kubernetes](https://upload.wikimedia.org/wikipedia/commons/6/67/Kubernetes_logo.svg
+"Kubernetes")

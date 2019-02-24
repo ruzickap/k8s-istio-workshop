@@ -33,5 +33,3 @@ Output:
 NAMESPACE     NAME                            READY   STATUS    RESTARTS   AGE
 kube-system   tiller-deploy-dbb85cb99-z4c47   1/1     Running   0          28s
 ```
-
-![Helm](https://datamountaineer.com/wp-content/uploads/2016/09/helm.png "Helm")
