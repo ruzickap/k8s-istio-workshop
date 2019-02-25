@@ -22,6 +22,7 @@ and observe what exactly is going on with your services.
 
 ::: warning
 If you have a MacOS, please install
+[Byobu](http://byobu.co/),
 [Firefox](https://www.mozilla.org/en-US/firefox/),
 [Git](https://git-scm.com/),
 [jq](https://stedolan.github.io/jq/),

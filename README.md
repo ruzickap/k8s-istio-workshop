@@ -7,7 +7,7 @@ Workshop pages:
 * Web Pages: [https://ruzickap.github.io/k8s-istio-workshop/](https://ruzickap.github.io/k8s-istio-workshop/)
 * Markdown: [https://github.com/ruzickap/k8s-istio-workshop/tree/master/docs](https://github.com/ruzickap/k8s-istio-workshop/tree/master/docs)
 
-Full asciinema workshop demo can be found here:
+Full asciinema workshop demo can be found here: [https://asciinema.org/a/229605](https://asciinema.org/a/229605?autoplay=1)
 
 You will create this environment during the lab:
 

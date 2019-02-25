@@ -4,9 +4,6 @@
 Screencast: [https://asciinema.org/a/229605?t=228](https://asciinema.org/a/229605?autoplay=0&t=228)
 :::
 
-![ElasticSearch](https://www.elastic.co/assets/blt2eb18ce156daade6/heart.svg
-"ElasticSearch")
-
 Add [ElasticSearch operator](https://github.com/upmc-enterprises/elasticsearch-operator)
 to Helm:
 
@@ -48,7 +45,7 @@ helm install --wait --name=elasticsearch --namespace logging es-operator/elastic
 sleep 120
 ```
 
-Show ElasticSearch components:
+Check ElasticSearch components:
 
 ```bash
 kubectl get svc,deploy,po,pvc,elasticsearchclusters --namespace=logging -o wide
@@ -86,10 +83,9 @@ elasticsearchcluster.enterprises.upmc.com/elasticsearch-cluster   18m
 
 ## Install [FluentBit](https://fluentbit.io/)
 
-![Fluent Bit](https://fluentbit.io/assets/img/logo1-default.png "Fluent Bit")
+Install FluentBit using Helm:
 
 ```bash
-# https://github.com/fluent/fluent-bit/issues/628
 helm install --wait stable/fluent-bit --name=fluent-bit --namespace=logging \
   --set metrics.enabled=true \
   --set backend.type=es \
@@ -102,7 +98,6 @@ helm install --wait stable/fluent-bit --name=fluent-bit --namespace=logging \
 Configure port forwarding for Kibana:
 
 ```bash
-# Kibana UI - https://localhost:5601
 kubectl -n logging port-forward $(kubectl -n logging get pod -l role=kibana -o jsonpath="{.items[0].metadata.name}") 5601:5601 &
 ```
 
@@ -111,7 +106,7 @@ Configure ElasticSearch:
 * Navigate to the [Kibana UI](https://localhost:5601) ([https://localhost:5601](https://localhost:5601))
   and click the **Set up index patterns** in the top right.
 * Use `*` as the **index pattern**, and click **Next step**.
-* Select `@timestamp` as the Time Filter field name, and click **Create index pattern**.
+* Select `@ts` as the Time Filter field name, and click **Create index pattern**.
 
 Check FluentBit installation:
 
@@ -137,13 +132,15 @@ Setup the port forwarding to Cerebro:
 kubectl -n logging port-forward $(kubectl -n logging get pod -l role=cerebro -o jsonpath="{.items[0].metadata.name}") 9000:9000 &
 ```
 
+[Cerebro](https://github.com/lmenezes/cerebro) ([http://localhost:9000](http://localhost:9000)):
+
+![Cerebro](./cerebro.png "Cerebro")
+
 Kibana ([https://localhost:5601](https://localhost:5601)):
-
-![Kibana](./kibana.png "Kibana")
-
-Cerebro ([https://localhost:9000](https://localhost:9000)):
 
 ![Kibana](./kibana.png "Kibana")
 
 ![ElasticSearch](https://static-www.elastic.co/assets/blteb1c97719574938d/logo-elastic-elasticsearch-lt.svg
 "ElasticSearch")
+
+![Fluent Bit](https://fluentbit.io/assets/img/logo1-default.png "Fluent Bit")

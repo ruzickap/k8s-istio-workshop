@@ -42,18 +42,20 @@ EOF
 
 -----
 
-Check the logs on both pods `reviews:v1` and `reviews:v2`:
+Check the logs on both pods `reviews:v1` and `reviews:v2` by splitting
+the `byobu` screen and checking logs of the pod:
 
 ```shell
+# Use "Ctrl + Alt then TAB" to switch between screens
 byobu
-byobu-tmux select-pane -t 0
 byobu-tmux split-window -v
-byobu-tmux select-pane -t 0
 ```
 
-```bash
-kubectl logs $(kubectl get pod -l app=reviews,version=v1 -o jsonpath="{.items[0].metadata.name}") istio-proxy --tail=10
-kubectl logs $(kubectl get pod -l app=reviews,version=v2 -o jsonpath="{.items[0].metadata.name}") istio-proxy --tail=10
+```shell
+# Screen 1
+kubectl logs $(kubectl get pod -l app=reviews,version=v1 -o jsonpath="{.items[0].metadata.name}") istio-proxy -f
+# Screen 2
+kubectl logs $(kubectl get pod -l app=reviews,version=v2 -o jsonpath="{.items[0].metadata.name}") istio-proxy -f
 ```
 
 Do a simple query by refreshing the page in the web browser.

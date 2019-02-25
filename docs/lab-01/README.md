@@ -7,9 +7,6 @@ Screencast: [https://asciinema.org/a/229605?t=1](https://asciinema.org/a/229605?
 Before you start with the main content of the workshop, you need to provision
 the VMs in OpenStack.
 
-![Openstack](https://www.openstack.org/themes/openstack/images/openstack-logo/2016R/OpenStack-Logo-Horizontal.SVG
-"Openstack")
-
 Create VMs in OpenStack using Ubuntu Docker image.
 
 ## Prepare the local working environment inside Docker
@@ -25,7 +22,13 @@ Install necessary software into the Docker container:
 
 ```bash
 apt update -qq
-apt-get install -y -qq apt-transport-https curl firefox git gnupg jq openssh-client psmisc siege sudo unzip vim > /dev/null
+apt-get install -y -qq apt-transport-https byobu curl firefox git gnupg jq openssh-client psmisc siege sudo unzip vim > /dev/null
+```
+
+Run firefox **inside docker** container and reopen this page in it:
+
+```shell
+firefox https://ruzickap.github.io/k8s-istio-workshop/lab-01/ &
 ```
 
 Install `kubernetes-client` package - (`kubectl`):
@@ -110,15 +113,10 @@ Create VMs in OpenStack:
 terraform apply -auto-approve -var-file=terrafrom/openstack/terraform.tfvars terrafrom/openstack
 ```
 
-Show Terraform output:
-
-```bash
-terraform output
-```
-
 Output:
 
 ```shell
+...
 vms_name = [
     pruzicka-k8s-istio-workshop-node01.01.localdomain,
     pruzicka-k8s-istio-workshop-node02.01.localdomain,
@@ -134,5 +132,5 @@ vms_public_ip = [
 At the end of the output you should see 3 IP addresses which
 should be accessible by ssh using your public key `~/.ssh/id_rsa.pub`.
 
-![Terraform](https://www.terraform.io/assets/images/logo-text-8c3ba8a6.svg
-"Terraform")
+![Openstack](https://www.openstack.org/themes/openstack/images/openstack-logo/2016R/OpenStack-Logo-Horizontal.SVG
+"Openstack")

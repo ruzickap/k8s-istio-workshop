@@ -4,9 +4,6 @@
 Screencast: [https://asciinema.org/a/229605?t=155](https://asciinema.org/a/229605?autoplay=0&t=155)
 :::
 
-![Rook](https://raw.github.com/rook/artwork/master/logo/Rook_Logo(Color).svg?sanitize=true
-"Rook")
-
 Install [Rook](https://rook.io/) Operator
 ([Ceph](https://ceph.com/) storage for k8s):
 
@@ -212,7 +209,8 @@ POOLS:
     replicapool     1       0 B         0        40 GiB           0
 ```
 
-Change listening port of Ceph Dashboard ([https://github.com/rook/rook/issues/2526](https://github.com/rook/rook/issues/2526)):
+Change listening port of [Ceph Dashboard](http://docs.ceph.com/docs/mimic/mgr/dashboard/)
+([https://github.com/rook/rook/issues/2526](https://github.com/rook/rook/issues/2526)):
 
 ```bash
 kubectl -n rook-ceph exec -it $(kubectl -n rook-ceph get pod -l "app=rook-ceph-tools" -o jsonpath='{.items[0].metadata.name}') -- ceph config set mgr mgr/dashboard/server_addr 0.0.0.0
@@ -227,12 +225,6 @@ Establish port forwarding:
 kubectl -n rook-ceph port-forward $(kubectl -n rook-ceph get pod -l app=rook-ceph-mgr -o jsonpath="{.items[0].metadata.name}") 8443:8443 &
 ```
 
-Run firefox inside docker container:
-
-```shell
-firefox &
-```
-
 To access the Ceph Dashboard [https://localhost:8443](https://localhost:8443)
 use username `admin` and password can be found by running:
 
@@ -243,3 +235,6 @@ kubectl -n rook-ceph get secret rook-ceph-dashboard-password -o yaml | grep "pas
 Ceph Dashboard ([https://localhost:8443](https://localhost:8443)):
 
 ![Ceph Dashboard](./ceph_dashboard.png "Ceph Dashboard")
+
+![Rook](https://raw.github.com/rook/artwork/master/logo/Rook_Logo(Color).svg?sanitize=true
+"Rook")
