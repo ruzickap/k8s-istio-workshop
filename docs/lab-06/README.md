@@ -1,5 +1,9 @@
 # Istio - Installation
 
+::: tip
+Screencast: [https://asciinema.org/a/229605?t=275](https://asciinema.org/a/229605?autoplay=0&t=275)
+:::
+
 Istio architectue
 
 ![Istio Architecture](https://istio.io/docs/concepts/what-is-istio/arch.svg

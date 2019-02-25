@@ -1,5 +1,9 @@
 # Istio - Weight-based routing
 
+::: tip
+Screencast: [https://asciinema.org/a/229605?t=470](https://asciinema.org/a/229605?autoplay=0&t=470)
+:::
+
 [https://istio.io/docs/tasks/traffic-management/traffic-shifting/#apply-weight-based-routing](https://istio.io/docs/tasks/traffic-management/traffic-shifting/#apply-weight-based-routing)
 
 In **Canary Deployments**, newer versions of services are incrementally rolled

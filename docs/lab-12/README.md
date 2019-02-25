@@ -1,5 +1,9 @@
 # Istio - Cleanup
 
+::: tip
+Screencast: [https://asciinema.org/a/229605?t=522](https://asciinema.org/a/229605?autoplay=0&t=522)
+:::
+
 Remove the Bookinfo application and clean it up (delete the routing rules
 and terminate the application pods):
 

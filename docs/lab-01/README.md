@@ -1,5 +1,9 @@
 # Create VMs in OpenStack
 
+::: tip
+Screencast: [https://asciinema.org/a/229605?t=1](https://asciinema.org/a/229605?autoplay=0&t=1)
+:::
+
 Before you start with the main content of the workshop, you need to provision
 the VMs in OpenStack.
 

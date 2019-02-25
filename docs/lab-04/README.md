@@ -1,7 +1,11 @@
 # Instal Rook
 
-![Rook Architecture](https://raw.githubusercontent.com/rook/rook/master/Documentation/media/kubernetes.png
-"Rook Architecture")
+::: tip
+Screencast: [https://asciinema.org/a/229605?t=155](https://asciinema.org/a/229605?autoplay=0&t=155)
+:::
+
+![Rook](https://raw.github.com/rook/artwork/master/logo/Rook_Logo(Color).svg?sanitize=true
+"Rook")
 
 Install [Rook](https://rook.io/) Operator
 ([Ceph](https://ceph.com/) storage for k8s):
@@ -239,6 +243,3 @@ kubectl -n rook-ceph get secret rook-ceph-dashboard-password -o yaml | grep "pas
 Ceph Dashboard ([https://localhost:8443](https://localhost:8443)):
 
 ![Ceph Dashboard](./ceph_dashboard.png "Ceph Dashboard")
-
-![Rook](https://raw.github.com/rook/artwork/master/logo/Rook_Logo(Color).svg?sanitize=true
-"Rook")

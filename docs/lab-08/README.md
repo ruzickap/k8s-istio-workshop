@@ -1,5 +1,9 @@
 # Istio - Configuring Request Routing
 
+::: tip
+Screencast: [https://asciinema.org/a/229605?t=427](https://asciinema.org/a/229605?autoplay=0&t=427)
+:::
+
 [https://istio.io/docs/tasks/traffic-management/request-routing/](https://istio.io/docs/tasks/traffic-management/request-routing/)
 
 This task shows you how to route requests dynamically to multiple versions

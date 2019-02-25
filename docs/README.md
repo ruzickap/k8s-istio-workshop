@@ -10,6 +10,9 @@ With Istio, you can manage network traffic, load balance across microservices,
 enforce access policies, verify service identity, secure service communication,
 and observe what exactly is going on with your services.
 
+* Full asciinema screencast: [https://asciinema.org/a/229605](https://asciinema.org/a/229605?autoplay=1)
+* GitHub repository: [https://github.com/ruzickap/k8s-istio-workshop](https://github.com/ruzickap/k8s-istio-workshop)
+
 ## Requirements
 
 * Linux Desktop - like [Ubuntu](https://www.ubuntu.com/download/desktop),
@@ -18,8 +21,15 @@ and observe what exactly is going on with your services.
 * Access to OpenStack environment to provision 3 VMs
 
 ::: warning
-If you have a MacOS, please install Firefox, Git, jq, kubectl, siege, Terraform,
-unzip yourself and start from [Lab 01 - Create VMs in OpenStack / Provision VMs
+If you have a MacOS, please install
+[Firefox](https://www.mozilla.org/en-US/firefox/),
+[Git](https://git-scm.com/),
+[jq](https://stedolan.github.io/jq/),
+[kubectl](https://kubernetes.io/docs/reference/kubectl/),
+[siege](https://www.joedog.org/siege-home/),
+[Terraform](https://www.terraform.io/),
+[unzip](http://www.info-zip.org/UnZip.html)
+yourself and start from [Lab 01 - Create VMs in OpenStack / Provision VMs
 in OpenStack](lab-01/README.md#provision-vms-in-openstack).
 :::
 
@@ -144,6 +154,7 @@ kubectl get nodes -o wide
   * Login: admin
 
   * Password:
+
     ```shell
     kubectl -n rook-ceph get secret rook-ceph-dashboard-password -o yaml \
     | grep "password:" | awk '{print $2}' | base64 --decode

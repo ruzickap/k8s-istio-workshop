@@ -1,5 +1,9 @@
 # Istio - Bookinfo Application
 
+::: tip
+Screencast: [https://asciinema.org/a/229605?t=352](https://asciinema.org/a/229605?autoplay=0&t=352)
+:::
+
 The Bookinfo application is broken into four separate microservices:
 
 * `productpage` - the productpage microservice calls the details and reviews

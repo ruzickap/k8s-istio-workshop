@@ -1,8 +1,12 @@
 # Install Kubernetes to the VMs
 
-* This diagram is showing how your environment will looks like after this lab:
+::: tip
+Screencast: [https://asciinema.org/a/229605?t=106](https://asciinema.org/a/229605?autoplay=0&t=106)
+:::
 
-  ![Lab diagram](./kubeadm_diagram.png "Lab diagram")
+This diagram is showing how your environment will looks like after this lab:
+
+![Lab diagram](./kubeadm_diagram.png "Lab diagram")
 
 Install k8s using kubeadm to the provisioned VMs:
 

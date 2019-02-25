@@ -1,5 +1,9 @@
 # Istio - Mirroring
 
+::: tip
+Screencast: [https://asciinema.org/a/229605?t=492](https://asciinema.org/a/229605?autoplay=0&t=492)
+:::
+
 [https://istio.io/docs/tasks/traffic-management/mirroring/](https://istio.io/docs/tasks/traffic-management/mirroring/)
 
 Mirroring sends a copy of live traffic to a mirrored service.

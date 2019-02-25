@@ -1,5 +1,9 @@
 # Install ElasticSearch and Kibana
 
+::: tip
+Screencast: [https://asciinema.org/a/229605?t=228](https://asciinema.org/a/229605?autoplay=0&t=228)
+:::
+
 ![ElasticSearch](https://www.elastic.co/assets/blt2eb18ce156daade6/heart.svg
 "ElasticSearch")
 
