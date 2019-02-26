@@ -77,3 +77,11 @@ jobs:
         skip-cleanup: true
         github-token: $GITHUB_TOKEN
         target-branch: gh-pages
+
+    - stage: Web Link Check
+      name: "Final web link check on deployed web pages"
+      language: minimal
+      services:
+        - docker
+      script:
+        - docker run -it --rm linkchecker/linkchecker --check-extern --ignore-url "(http|https)://localhost" https://ruzickap.github.io/k8s-istio-workshop
