@@ -10,7 +10,7 @@ Helm Architecture:
 "Helm Architecture")
 ([https://blogs.oracle.com/cloudnative/helm-kubernetes-package-management](https://blogs.oracle.com/cloudnative/helm-kubernetes-package-management))
 
-Install [Helm](https://helm.sh/) binary locally:
+Install [Helm](https://helm.sh/) binary:
 
 ```bash
 curl -s https://raw.githubusercontent.com/helm/helm/master/scripts/get | bash

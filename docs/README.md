@@ -15,24 +15,9 @@ and observe what exactly is going on with your services.
 
 ## Requirements
 
-* Linux Desktop - like [Ubuntu](https://www.ubuntu.com/download/desktop),
-  [Fedora](https://getfedora.org/), [Debian](https://www.debian.org/)
 * [Docker](https://www.docker.com/)
+* [kubectl](https://kubernetes.io/docs/reference/kubectl/)
 * Access to OpenStack environment to provision 3 VMs
-
-::: warning
-If you have a MacOS, please install
-[Byobu](http://byobu.co/),
-[Firefox](https://www.mozilla.org/en-US/firefox/),
-[Git](https://git-scm.com/),
-[jq](https://stedolan.github.io/jq/),
-[kubectl](https://kubernetes.io/docs/reference/kubectl/),
-[siege](https://www.joedog.org/siege-home/),
-[Terraform](https://www.terraform.io/),
-[unzip](http://www.info-zip.org/UnZip.html)
-yourself and start from [Lab 01 - Create VMs in OpenStack / Provision VMs
-in OpenStack](lab-01/README.md#provision-vms-in-openstack).
-:::
 
 ## Objectives
 

@@ -169,7 +169,11 @@ rook-ceph          Active   59m
 rook-ceph-system   Active   63m
 ```
 
-Configure port forwarding for Istio services:
+::: warning
+Run the following command on your local environment.
+:::
+
+Configure port forwarding to Istio services:
 
 ```bash
 # Jaeger - http://localhost:16686

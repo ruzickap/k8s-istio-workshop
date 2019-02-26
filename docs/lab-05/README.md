@@ -95,7 +95,11 @@ helm install --wait stable/fluent-bit --name=fluent-bit --namespace=logging \
   --set backend.es.tls_verify=off
 ```
 
-Configure port forwarding for Kibana:
+::: warning
+Run the following command on your local environment.
+:::
+
+Configure port forwarding to Kibana:
 
 ```bash
 kubectl -n logging port-forward $(kubectl -n logging get pod -l role=kibana -o jsonpath="{.items[0].metadata.name}") 5601:5601 &
@@ -126,7 +130,11 @@ logging     pod/fluent-bit-fluent-bit-c6tbx   1/1     Running   0          80s  
 logging     pod/fluent-bit-fluent-bit-zfkqr   1/1     Running   0          80s   10.244.2.12   pruzicka-k8s-istio-workshop-node02   <none>           <none>
 ```
 
-Setup the port forwarding to Cerebro:
+::: warning
+Run the following command on your local environment.
+:::
+
+Configure port forwarding to Cerebro:
 
 ```bash
 kubectl -n logging port-forward $(kubectl -n logging get pod -l role=cerebro -o jsonpath="{.items[0].metadata.name}") 9000:9000 &
@@ -136,7 +144,7 @@ kubectl -n logging port-forward $(kubectl -n logging get pod -l role=cerebro -o 
 
 ![Cerebro](./cerebro.png "Cerebro")
 
-Kibana ([https://localhost:5601](https://localhost:5601)):
+[Kibana](https://www.elastic.co/products/kibana) ([https://localhost:5601](https://localhost:5601)):
 
 ![Kibana](./kibana.png "Kibana")
 

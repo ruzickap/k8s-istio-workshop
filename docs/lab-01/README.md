@@ -15,23 +15,17 @@ Run Ubuntu docker image and mount the directory there:
 
 ```bash
 mkdir /tmp/test && cd /tmp/test
-docker run -it -rm -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -v $PWD:/mnt ubuntu
+docker run -it -rm -v $PWD:/mnt ubuntu
 ```
 
 Install necessary software into the Docker container:
 
 ```bash
 apt update -qq
-apt-get install -y -qq apt-transport-https byobu curl firefox git gnupg jq openssh-client psmisc siege sudo unzip vim > /dev/null
+apt-get install -y -qq apt-transport-https byobu curl git gnupg jq openssh-client psmisc siege sudo unzip vim > /dev/null
 ```
 
-Run firefox **inside docker** container and reopen this page in it:
-
-```shell
-firefox https://ruzickap.github.io/k8s-istio-workshop/lab-01/ &
-```
-
-Install `kubernetes-client` package - (`kubectl`):
+Install `kubernetes-client` package:
 
 ```bash
 curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -

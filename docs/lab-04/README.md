@@ -219,7 +219,11 @@ kubectl delete pod -n rook-ceph  $(kubectl -n rook-ceph get pod -l app=rook-ceph
 sleep 5
 ```
 
-Establish port forwarding:
+::: warning
+Run the following command on your local environment.
+:::
+
+Configure port forwarding to Ceph Dashboard:
 
 ```bash
 kubectl -n rook-ceph port-forward $(kubectl -n rook-ceph get pod -l app=rook-ceph-mgr -o jsonpath="{.items[0].metadata.name}") 8443:8443 &
