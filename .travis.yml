@@ -84,4 +84,4 @@ jobs:
       services:
         - docker
       script:
-        - docker run -it --rm linkchecker/linkchecker --check-extern --ignore-url "(http|https)://localhost" https://ruzickap.github.io/k8s-istio-workshop
+        - docker run -it --rm linkchecker/linkchecker --check-extern --no-status --ignore-url "(http|https)://localhost" https://$(dirname $TRAVIS_REPO_SLUG).github.io/$(basename $TRAVIS_REPO_SLUG)
