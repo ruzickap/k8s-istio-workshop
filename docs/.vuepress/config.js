@@ -3,7 +3,7 @@ module.exports = {
   description: "Istio workshop running on OpenStack",
   base: '/k8s-istio-workshop/',
   head: [
-    ['link', { rel: "icon", href: "favicon.ico" }]
+    ['link', { rel: "icon", href: "/favicon.ico" }]
   ],
   themeConfig: {
     displayAllHeaders: true,
