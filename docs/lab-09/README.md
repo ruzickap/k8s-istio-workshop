@@ -93,7 +93,7 @@ spec:
 
 [https://istio.io/docs/tasks/traffic-management/fault-injection/#injecting-an-http-abort-fault](https://istio.io/docs/tasks/traffic-management/fault-injection/#injecting-an-http-abort-fault)
 
-Let's ntroduce an HTTP abort to the ratings microservices for the test user `jason`.
+Let's introduce an HTTP abort to the ratings microservices for the test user `jason`.
 
 Create a fault injection rule to send an HTTP abort for user `jason`:
 
