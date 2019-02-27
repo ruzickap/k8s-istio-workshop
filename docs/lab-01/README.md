@@ -15,7 +15,7 @@ Run Ubuntu docker image and mount the directory there:
 
 ```bash
 mkdir /tmp/test && cd /tmp/test
-docker run -it -rm -v $PWD:/mnt ubuntu
+docker run -it --rm -v $PWD:/mnt ubuntu
 ```
 
 Install necessary software into the Docker container:
