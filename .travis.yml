@@ -31,7 +31,7 @@ jobs:
         - terraform validate -var-file=terraform.tfvars terrafrom/openstack
 
     - stage: Tests
-      name: "Markdown test"
+      name: "Markdown check"
       language: node_js
       node_js: 10
       install:
@@ -44,6 +44,25 @@ jobs:
         # Link Checks
         - 'echo "{ \"ignorePatterns\": [ { \"pattern\": \"^(http|https)://localhost\" } ] }" > /tmp/config.json'
         - find . -name "*.md" -print0 | xargs -0 markdown-link-check --config /tmp/config.json --quiet
+
+    - stage: Tests
+      name: "Web links check"
+      language: node_js
+      services:
+        - docker
+      node_js: 10
+      install:
+        - npm install -g vuepress@next
+        - npm install @vuepress/plugin-medium-zoom @vuepress/plugin-back-to-top vuepress-plugin-seo
+      script:
+        # Get local IP
+        - export HOST_IP_ADDRESS="$(ip -4 addr show docker0 | sed -n 's/.* inet \([^/]*\).*/\1/p')"
+        # Build the docs
+        - vuepress build --silent --dest ${TRAVIS_REPO_SLUG##*/} docs
+        # Start Web server
+        - python3 -m http.server 8080 &> /dev/null &
+        # Check links on generated pages
+        - docker run -it --rm linkchecker/linkchecker --check-extern --no-status --ignore-url "(http|https)://localhost" http://${HOST_IP_ADDRESS}:8080/${TRAVIS_REPO_SLUG##*/}
 
     - stage: Tests
       name: "Command check"
@@ -78,10 +97,10 @@ jobs:
         github-token: $GITHUB_TOKEN
         target-branch: gh-pages
 
-    - stage: Web Link Check
-      name: "Final web link check on deployed web pages"
+    - stage: Web Links Check
+      name: "Final web links check with deployed web pages"
       language: minimal
       services:
         - docker
       script:
-        - docker run -it --rm linkchecker/linkchecker --check-extern --no-status --ignore-url "(http|https)://localhost" https://$(dirname $TRAVIS_REPO_SLUG).github.io/$(basename $TRAVIS_REPO_SLUG)
+        - docker run -it --rm linkchecker/linkchecker --check-extern --no-status --ignore-url "(http|https)://localhost" https://${TRAVIS_REPO_SLUG%/*}.github.io/${TRAVIS_REPO_SLUG##*/}
