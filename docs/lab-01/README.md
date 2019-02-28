@@ -14,9 +14,15 @@ Create VMs in OpenStack using Ubuntu Docker image.
 Run Ubuntu docker image and mount the directory there:
 
 ```bash
-mkdir /tmp/test && cd /tmp/test
-docker run -it --rm -v $PWD:/mnt ubuntu
+mkdir /var/tmp/test && cd /var/tmp/test
+docker run -it --rm -e USER="$USER" -v $PWD:/mnt -v $HOME/.ssh:/root/.ssh:ro ubuntu
 ```
+
+::: tip
+All commands in the labs should be executed inside the Docker container.
+Only few `kubectl` needs to be executed directly on the PC and it's always
+explicitly mentioned in the docs.
+:::
 
 Install necessary software into the Docker container:
 
@@ -75,7 +81,7 @@ cd k8s-istio-workshop
 ```
 
 ::: danger STOP
-Modify the Terraform variable file!
+Modify the OpenStack access credentials in the following Terraform variable file!
 :::
 
 ```bash
@@ -89,9 +95,9 @@ openstack_networking_subnet_dns_nameservers = ["172.19.80.70"]
 openstack_password                          = "$OPENSTACK_PASSWORD"
 # drivetrain-team
 openstack_tenant_name                       = "mirantis-services-team"
-openstack_user_name                         = "pruzicka"
+openstack_user_name                         = "$USER"
 openstack_user_domain_name                  = "ldap_mirantis"
-prefix                                      = "pruzicka-k8s-istio-workshop"
+prefix                                      = "$USER-k8s-istio-workshop"
 EOF
 ```
 

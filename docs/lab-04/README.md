@@ -220,7 +220,8 @@ sleep 5
 ```
 
 ::: warning
-Run the following command on your local environment.
+Run the following command on your local environment to allow your browser reach
+the pods ports.
 :::
 
 Configure port forwarding to Ceph Dashboard:

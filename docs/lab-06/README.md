@@ -143,7 +143,7 @@ kubectl apply -f ../../files/fluentd-istio.yaml
 
 Check + Enable Istio in default namespace.
 
-Let the default namespace to use Istio injection:
+Allow the `default` namespace to use Istio injection:
 
 ```bash
 kubectl label namespace default istio-injection=enabled

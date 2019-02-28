@@ -211,8 +211,11 @@ echo "$INGRESS_PORT | $SECURE_INGRESS_PORT | $INGRESS_HOST | $GATEWAY_URL | http
 Output:
 
 ```shell
-31380 | 31390 | 172.16.242.170 | 172.16.242.170:31380
+31380 | 31390 | 172.16.242.170 | 172.16.242.170:31380 | http://172.16.242.170:31380/productpage
 ```
+
+Point your browser to `http://$GATEWAY_URL/productpage`
+(take the full URL from the output of the commands above).
 
 -----
 

@@ -62,13 +62,13 @@ kube-system   pod/kube-scheduler-pruzicka-k8s-istio-workshop-node01            1
 ```
 
 ::: warning
-Configure the access to k8s also from your local environment...
+Configure the access to kubernetes cluster also from your local PC.
 :::
 
 Open new terminal on your PC and run:
 
 ```shell
-export KUBECONFIG=/tmp/test/k8s-istio-workshop/kubeconfig.conf
+export KUBECONFIG=/var/tmp/test/k8s-istio-workshop/kubeconfig.conf
 kubectl get nodes -o wide
 ```
 

@@ -18,6 +18,7 @@ and observe what exactly is going on with your services.
 * [Docker](https://www.docker.com/)
 * [kubectl](https://kubernetes.io/docs/reference/kubectl/)
 * Access to OpenStack environment to provision 3 VMs
+* Kubernetes knowledge
 
 ## Objectives
 

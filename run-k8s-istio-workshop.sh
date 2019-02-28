@@ -35,8 +35,8 @@ clear
 ### Please run these commands before running the script
 
 # OPENSTACK_PASSWORD="my_secret_password"
-# mkdir /tmp/test && cd /tmp/test
-# docker run -it -rm -e DISPLAY=$DISPLAY -e OPENSTACK_PASSWORD=$OPENSTACK_PASSWORD -e SSH_AUTH_SOCK=/ssh-agent -v $SSH_AUTH_SOCK:/ssh-agent -v /home/$USER/.ssh:/root/.ssh:ro -v /tmp/.X11-unix:/tmp/.X11-unix -v $PWD:/mnt ubuntu
+# mkdir /var/tmp/test && cd /var/tmp/test
+# docker run -it -rm -e USER="$USER" -e OPENSTACK_PASSWORD="$OPENSTACK_PASSWORD" -v /home/$USER/.ssh:/root/.ssh:ro -v $PWD:/mnt ubuntu
 # apt-get update -qq && apt-get install -qq -y curl git pv > /dev/null
 # git clone https://github.com/ruzickap/k8s-istio-workshop && cd k8s-istio-workshop
 # ./run-k8s-istio-workshop.sh
