@@ -15,7 +15,11 @@ Run Ubuntu docker image and mount the directory there:
 
 ```bash
 mkdir /var/tmp/test && cd /var/tmp/test
-docker run -it --rm -e USER="$USER" -v $PWD:/mnt -v $HOME/.ssh:/root/.ssh:ro ubuntu
+if [ -n "$SSH_AUTH_SOCK" ]; then
+  docker run -it --rm -e USER="$USER" -e SSH_AUTH_SOCK=$SSH_AUTH_SOCK -v $SSH_AUTH_SOCK:$SSH_AUTH_SOCK -v $PWD:/mnt -v $HOME/.ssh:/root/.ssh:ro ubuntu
+else
+  docker run -it --rm -e USER="$USER" -v $PWD:/mnt -v $HOME/.ssh:/root/.ssh:ro ubuntu
+fi
 ```
 
 ::: tip
