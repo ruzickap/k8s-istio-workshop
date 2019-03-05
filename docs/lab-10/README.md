@@ -10,7 +10,7 @@ In **Canary Deployments**, newer versions of services are incrementally rolled
 out to users to minimize the risk and impact of any bugs introduced by the newer
 version.
 
-![Traffic Management with Istio](https://raw.githubusercontent.com/istio/istio.io/master/content/docs/concepts/traffic-management/ServiceModel_Versions.svg?sanitize=true
+![Traffic Management with Istio](https://raw.githubusercontent.com/istio/istio.io/7bf371365e4a16a9a13c0e79355fe1eac7f8f99f/content/docs/concepts/traffic-management/ServiceModel_Versions.svg?sanitize=true
 "Traffic Management with Istio")
 
 Route a percentage of traffic to one service or another - send **%50**

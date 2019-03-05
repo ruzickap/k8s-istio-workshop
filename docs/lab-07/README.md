@@ -32,7 +32,7 @@ There are 3 versions of the `reviews` microservice:
 
 [Bookinfo](https://istio.io/docs/examples/bookinfo/) application architecture:
 
-![Application Architecture with Istio](https://raw.githubusercontent.com/istio/istio.io/master/content/docs/examples/bookinfo/withistio.svg?sanitize=true
+![Application Architecture with Istio](https://raw.githubusercontent.com/istio/istio.io/7bf371365e4a16a9a13c0e79355fe1eac7f8f99f/content/docs/examples/bookinfo/withistio.svg?sanitize=true
 "Application Architecture with Istio")
 
 Deploy the demo of [Bookinfo](https://istio.io/docs/examples/bookinfo/) application:

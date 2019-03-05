@@ -4,7 +4,7 @@
 and observe microservices, also known as a service mesh, on cloud platforms
 such as Kubernetes.
 
-![Istio](https://www.vectorlogo.zone/logos/istioio/istioio-ar21.svg "Istio")
+![Istio](./.vuepress/public/istio.svg "Istio")
 
 With Istio, you can manage network traffic, load balance across microservices,
 enforce access policies, verify service identity, secure service communication,
