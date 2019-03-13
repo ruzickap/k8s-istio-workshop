@@ -11,6 +11,9 @@ INSTALL_KUBERNETES="
 export DEBIAN_FRONTEND='noninteractive'
 apt-get update -qq && apt-get install -y -qq apt-transport-https curl libseccomp2 > /dev/null
 
+swapoff -a
+sed -i.orig \"s/.*swap.*/#&/\" /etc/fstab
+
 modprobe br_netfilter
 cat > /etc/sysctl.d/k8s.conf << EOF
 net.bridge.bridge-nf-call-iptables  = 1
@@ -27,7 +30,8 @@ deb https://apt.kubernetes.io/ kubernetes-xenial main
 EOF2
 
 apt-get update -qq
-apt-get install -y -qq --no-install-recommends chrony kubelet=${KUBERNETES_VERSION}-00 kubeadm=${KUBERNETES_VERSION}-00 kubectl=${KUBERNETES_VERSION}-00 > /dev/null
+apt-get install -y -qq --no-install-recommends chrony docker.io=18.06.1* kubelet=${KUBERNETES_VERSION}-00 kubeadm=${KUBERNETES_VERSION}-00 kubectl=${KUBERNETES_VERSION}-00 > /dev/null
+systemctl stop docker
 
 cat > /etc/systemd/system/kubelet.service.d/0-containerd.conf << EOF
 [Service]
@@ -36,6 +40,7 @@ EOF
 
 systemctl daemon-reload
 systemctl enable containerd && systemctl start containerd
+#systemctl enable docker.service && systemctl start docker
 systemctl enable kubelet && systemctl start kubelet
 "
 
@@ -64,6 +69,7 @@ ssh -t ${MYUSER}@${NODE_IP[0]} ${SSH_ARGS} "sudo /bin/bash -cx '
 $INSTALL_KUBERNETES
 
 kubeadm init --cri-socket /run/containerd/containerd.sock --apiserver-cert-extra-sans=${NODE_IP[0]},${NODE_IP[1]},${NODE_IP[2]} --pod-network-cidr=$POD_NETWORK_CIDR --kubernetes-version v${KUBERNETES_VERSION}
+#kubeadm init --apiserver-cert-extra-sans=${NODE_IP[0]},${NODE_IP[1]},${NODE_IP[2]} --pod-network-cidr=$POD_NETWORK_CIDR --kubernetes-version v${KUBERNETES_VERSION}
 
 test -d /home/$MYUSER/.kube || mkdir /home/$MYUSER/.kube
 cp -i /etc/kubernetes/admin.conf /home/$MYUSER/.kube/config
@@ -87,6 +93,7 @@ for NODE in ${NODE_IP[1]} ${NODE_IP[2]}; do
 $INSTALL_KUBERNETES > /dev/null
 hostname
 $KUBEADM_TOKEN_COMMAND --cri-socket /run/containerd/containerd.sock
+#$KUBEADM_TOKEN_COMMAND
 '" &
 done
 
