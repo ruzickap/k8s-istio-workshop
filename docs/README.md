@@ -103,7 +103,7 @@ kubectl get nodes -o wide
 
   * Link: [http://localhost:20001](http://localhost:20001)
 
-* Servicegraph - [https://istio.io/docs/tasks/telemetry/servicegraph/](https://istio.io/docs/tasks/telemetry/servicegraph/)
+* Servicegraph - [https://archive.istio.io/v1.0/docs/tasks/telemetry/servicegraph/](https://archive.istio.io/v1.0/docs/tasks/telemetry/servicegraph/)
 
   * ```shell
     kubectl -n istio-system port-forward $(kubectl -n istio-system get pod \
