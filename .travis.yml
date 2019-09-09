@@ -2,8 +2,8 @@
 dist: xenial
 
 branches:
-  except:
-    - gh-pages
+  only:
+  - master
 
 jobs:
   include:
