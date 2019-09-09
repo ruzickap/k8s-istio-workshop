@@ -148,7 +148,4 @@ kubectl -n logging port-forward $(kubectl -n logging get pod -l role=cerebro -o 
 
 ![Kibana](./kibana.png "Kibana")
 
-![ElasticSearch](https://static-www.elastic.co/assets/blteb1c97719574938d/logo-elastic-elasticsearch-lt.svg
-"ElasticSearch")
-
 ![Fluent Bit](https://fluentbit.io/assets/img/logo1-default.png "Fluent Bit")
