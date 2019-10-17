@@ -167,4 +167,4 @@ kubectl get nodes -o wide
 
   * [Istio Workshop by Ray Tsang](https://github.com/retroryan/istio-workshop)
 
-  * [Amazon EKS Workshop - Service Mesh with Istio](https://eksworkshop.com/servicemesh/)
+  * [Amazon EKS Workshop - Service Mesh with Istio](https://eksworkshop.com/servicemesh_with_istio/)
