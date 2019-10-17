@@ -1,6 +1,6 @@
 # Kubernetes with Istio workshop
 
-[![Build Status](https://travis-ci.com/ruzickap/k8s-istio-workshop.svg?branch=master)](https://travis-ci.com/ruzickap/k8s-istio-workshop)
+![Build Status](https://github.com/ruzickap/k8s-istio-workshop/workflows/vuepress-build/badge.svg)
 
 Workshop pages:
 

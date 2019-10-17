@@ -122,7 +122,7 @@ kubectl get nodes -o wide
 
   * Link: [https://localhost:5601](https://localhost:5601)
 
-* [Cerbero](https://github.com/lmenezes/cerebro)
+* [Cerebro](https://github.com/lmenezes/cerebro)
 
   * ```shell
     kubectl -n logging port-forward $(kubectl -n logging get pod \

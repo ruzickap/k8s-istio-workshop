@@ -14,7 +14,7 @@ sed -i "/read NAMESPACE/d" ./samples/bookinfo/platform/kube/cleanup.sh
 ./samples/bookinfo/platform/kube/cleanup.sh
 ```
 
-To remove your VMs from Openstack, please run:
+To remove your VMs from OpenStack, please run:
 
 ```shell
 cd ../..

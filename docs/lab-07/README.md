@@ -269,7 +269,7 @@ Output:
 ...
 ```
 
-Generate some traffic for next 5 minutes to gether some data:
+Generate some traffic for next 5 minutes to gather some data:
 
 ```bash
 siege --log=/tmp/siege --concurrent=1 -q --internet --time=5M $GATEWAY_URL/productpage &

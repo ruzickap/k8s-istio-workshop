@@ -8,7 +8,7 @@ This diagram is showing how your environment will looks like after this lab:
 
 ![Lab diagram](./kubeadm_diagram.png "Lab diagram")
 
-Install k8s using kubeadm to the provisioned VMs:
+Install k8s using `kubeadm` to the provisioned VMs:
 
 ```bash
 ./files/install-k8s-kubeadm.sh
@@ -62,7 +62,7 @@ kube-system   pod/kube-scheduler-pruzicka-k8s-istio-workshop-node01            1
 ```
 
 ::: warning
-Configure the access to kubernetes cluster also from your local PC.
+Configure the access to Kubernetes cluster also from your local PC.
 :::
 
 Open new terminal on your PC and run:

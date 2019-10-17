@@ -6,7 +6,7 @@ Screencast: [https://asciinema.org/a/229605?t=450](https://asciinema.org/a/22960
 
 [https://istio.io/docs/tasks/traffic-management/fault-injection/#injecting-an-http-delay-fault](https://istio.io/docs/tasks/traffic-management/fault-injection/#injecting-an-http-delay-fault)
 
-Inject a 7s delay between the `reviews:v2` and ratings microservices for
+Inject a 7 seconds delay between the `reviews:v2` and ratings microservices for
 user `jason`:
 
 ```bash

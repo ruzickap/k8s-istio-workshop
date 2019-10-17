@@ -1,4 +1,4 @@
-# Instal Rook
+# Install Rook
 
 ::: tip
 Screencast: [https://asciinema.org/a/229605?t=155](https://asciinema.org/a/229605?autoplay=0&t=155)
@@ -13,7 +13,7 @@ helm install --wait --name rook-ceph --namespace rook-ceph-system rook-stable/ro
 sleep 40
 ```
 
-See how the rook-ceph-system should look like:
+See how the `rook-ceph-system` should look like:
 
 ```bash
 kubectl get svc,deploy,po --namespace=rook-ceph-system -o wide
@@ -42,7 +42,7 @@ kubectl create -f https://raw.githubusercontent.com/rook/rook/v0.9.3/cluster/exa
 ```
 
 Get the [Toolbox](https://raw.githubusercontent.com/rook/rook/v0.9.3/cluster/examples/kubernetes/ceph/toolbox.yaml)
-with ceph commands:
+with Ceph commands:
 
 ```bash
 kubectl create -f https://raw.githubusercontent.com/rook/rook/v0.9.3/cluster/examples/kubernetes/ceph/toolbox.yaml

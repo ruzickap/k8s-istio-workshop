@@ -4,7 +4,7 @@
 Screencast: [https://asciinema.org/a/229605?t=275](https://asciinema.org/a/229605?autoplay=0&t=275)
 :::
 
-Istio architectue
+Istio architecture
 
 ![Istio Architecture](https://raw.githubusercontent.com/istio/istio.io/7bf371365e4a16a9a13c0e79355fe1eac7f8f99f/content/docs/concepts/what-is-istio/arch.svg?sanitize=true
 "Istio Architecture")
