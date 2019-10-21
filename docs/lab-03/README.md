@@ -13,6 +13,7 @@ Helm Architecture:
 Install [Helm](https://helm.sh/) binary:
 
 ```bash
+export DESIRED_VERSION="v2.13.0"
 curl -s https://raw.githubusercontent.com/helm/helm/master/scripts/get | bash
 ```
 
