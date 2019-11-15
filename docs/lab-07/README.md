@@ -126,7 +126,7 @@ zipkinAddress: zipkin.istio-system:9411
 ...
 ```
 
-Define the [Istio gateway](https://istio.io/docs/reference/config/networking/v1alpha3/gateway/)
+Define the [Istio gateway](https://istio.io/docs/reference/config/networking/gateway/)
 for the application:
 
 ```bash
@@ -231,7 +231,7 @@ Output:
 200
 ```
 
-Create default [destination rules](https://istio.io/docs/reference/config/networking/v1alpha3/destination-rule/)
+Create default [destination rules](https://istio.io/docs/reference/config/networking/destination-rule/)
 (subsets) for the Bookinfo services:
 
 ```bash
