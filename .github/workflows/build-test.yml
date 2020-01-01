@@ -4,7 +4,6 @@ on:
   pull_request:
     types: [opened, synchronize]
   push:
-    branches: [master]
 
 jobs:
   terraform-checks:
@@ -113,6 +112,7 @@ jobs:
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v2.8.0
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
         env:
           ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
           PUBLISH_BRANCH: gh-pages
