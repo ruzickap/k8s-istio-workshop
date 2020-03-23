@@ -43,18 +43,18 @@ jobs:
           terraform init     -var-file=terraform.tfvars terrafrom/openstack
           terraform validate -var-file=terraform.tfvars terrafrom/openstack
 
-  command-check:
-    runs-on: ubuntu-18.04
-    steps:
-      - uses: actions/checkout@v2
+  # command-check:
+  #   runs-on: ubuntu-18.04
+  #   steps:
+  #     - uses: actions/checkout@v2
 
-      - name: Update repositories
-        run: sudo apt update
+  #     - name: Update repositories
+  #       run: sudo apt update
 
-      - name: Run tests
-        run: |
-          sudo apt install -y pv siege
-          tests/ci_test.sh
+  #     - name: Run tests
+  #       run: |
+  #         sudo apt install -y pv siege
+  #         tests/ci_test.sh
 
   markdownlint-check:
     runs-on: ubuntu-18.04
