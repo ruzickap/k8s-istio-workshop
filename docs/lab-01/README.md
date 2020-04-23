@@ -66,7 +66,7 @@ Terraform diagram:
 
 ![Terraform](https://cdn-images-1.medium.com/max/1200/1*lYFNHNM03biX_95IQMayUw.png
 "Terraform")
-([https://hackernoon.com/terraform-openstack-ansible-d680ea466e22](https://hackernoon.com/terraform-openstack-ansible-d680ea466e22))
+(hackernoon.com/terraform-openstack-ansible-d680ea466e22)
 
 Generate ssh keys if not exists:
 
