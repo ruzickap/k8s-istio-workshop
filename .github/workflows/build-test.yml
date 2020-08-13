@@ -3,6 +3,8 @@ name: build-test
 on:
   pull_request:
     types: [opened, synchronize]
+    paths:
+      - .github/workflows/build-test.yml
   push:
     branches:
       - master
@@ -17,8 +19,8 @@ jobs:
 
       - name: Install Terraform
         run: |
-          export TERRAFORM_LATEST_VERSION=$(curl -s https://checkpoint-api.hashicorp.com/v1/check/terraform | jq -r -M '.current_version')
-          curl --silent --location https://releases.hashicorp.com/terraform/${TERRAFORM_LATEST_VERSION}/terraform_${TERRAFORM_LATEST_VERSION}_linux_amd64.zip --output /tmp/terraform_linux_amd64.zip
+          export TERRAFORM_VERSION="0.12.29"
+          curl --silent --location https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip --output /tmp/terraform_linux_amd64.zip
           sudo unzip -q -o /tmp/terraform_linux_amd64.zip -d /usr/local/bin/
 
       - name: Generate ssh key if needed
