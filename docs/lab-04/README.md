@@ -210,7 +210,7 @@ POOLS:
     replicapool     1       0 B         0        40 GiB           0
 ```
 
-Change listening port of [Ceph Dashboard](http://docs.ceph.com/docs/mimic/mgr/dashboard/)
+Change listening port of [Ceph Dashboard](https://docs.ceph.com/en/latest/mgr/dashboard/)
 ([https://github.com/rook/rook/issues/2526](https://github.com/rook/rook/issues/2526)):
 
 ```bash
