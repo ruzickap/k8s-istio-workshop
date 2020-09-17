@@ -131,7 +131,7 @@ kubectl get nodes -o wide
 
   * Link: [http://localhost:9000](http://localhost:9000)
 
-* [Ceph Dashboard](http://docs.ceph.com/docs/mimic/mgr/dashboard/)
+* [Ceph Dashboard](https://docs.ceph.com/en/latest/mgr/dashboard/)
 
   * ```shell
     kubectl -n rook-ceph port-forward $(kubectl -n rook-ceph get pod \
