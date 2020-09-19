@@ -43,6 +43,8 @@ module.exports = {
   plugins: [
     ['@vuepress/medium-zoom'],
     ['@vuepress/back-to-top'],
+    ['reading-progress'],
+    ['smooth-scroll'],
     ['seo']
   ]
 }
