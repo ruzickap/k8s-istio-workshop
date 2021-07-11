@@ -5,7 +5,7 @@ Screencast: [https://asciinema.org/a/229605?t=155](https://asciinema.org/a/22960
 :::
 
 Install [Rook](https://rook.io/) Operator
-([Ceph](https://ceph.com/) storage for k8s):
+([Ceph](https://ceph.io/en/) storage for k8s):
 
 ```bash
 helm repo add rook-stable https://charts.rook.io/stable

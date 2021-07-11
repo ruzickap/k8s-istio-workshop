@@ -72,5 +72,5 @@ export KUBECONFIG=/var/tmp/test/k8s-istio-workshop/kubeconfig.conf
 kubectl get nodes -o wide
 ```
 
-![Kubernetes](https://upload.wikimedia.org/wikipedia/commons/6/67/Kubernetes_logo.svg
+![Kubernetes](https://raw.githubusercontent.com/cncf/artwork/04763c0f5f72b23d6a20bfc9c68c88cee805dbcc/projects/kubernetes/horizontal/color/kubernetes-horizontal-color.svg
 "Kubernetes")
