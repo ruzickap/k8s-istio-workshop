@@ -1,5 +1,18 @@
 # Changelog
 
+## [v0.1.1](https://github.com/ruzickap/k8s-istio-workshop/compare/v0.1.0...v0.1.1) (2021-12-20)
+
+- Improve GitHub Actions [`#85`](https://github.com/ruzickap/k8s-istio-workshop/pull/85)
+- Fix linter issues [`#84`](https://github.com/ruzickap/k8s-istio-workshop/pull/84)
+- Upgrade GH Actions versions [`#82`](https://github.com/ruzickap/k8s-istio-workshop/pull/82)
+- npm update [`#81`](https://github.com/ruzickap/k8s-istio-workshop/pull/81)
+- Upgrade action-my-broken-link-checker [`#70`](https://github.com/ruzickap/k8s-istio-workshop/pull/70)
+- Fix My Broken Link Checker parameter [`#60`](https://github.com/ruzickap/k8s-istio-workshop/pull/60)
+- Add missing Vuepress plugins to config.js [`#59`](https://github.com/ruzickap/k8s-istio-workshop/pull/59)
+- Update package-lock.json [`#58`](https://github.com/ruzickap/k8s-istio-workshop/pull/58)
+- Fix old Ceph Dashboard link [`#57`](https://github.com/ruzickap/k8s-istio-workshop/pull/57)
+- Fix ceph URL (#83) [`23dc4bf`](https://github.com/ruzickap/k8s-istio-workshop/commit/23dc4bfc51cf283eafe8845fba958982cfcd91ca)
+
 ## [v0.1.0](https://github.com/ruzickap/k8s-istio-workshop/compare/v0.0.1...v0.1.0) (2020-09-17)
 
 - Add actions/checkout with gh-pages to periodic-broken-link-checks.yml [`#55`](https://github.com/ruzickap/k8s-istio-workshop/pull/55)
