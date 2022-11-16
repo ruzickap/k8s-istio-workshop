@@ -148,4 +148,4 @@ kubectl -n logging port-forward $(kubectl -n logging get pod -l role=cerebro -o 
 
 ![Kibana](./kibana.png "Kibana")
 
-![Fluent Bit](https://fluentbit.io/assets/img/logo1-default.png "Fluent Bit")
+![Fluent Bit](https://raw.githubusercontent.com/cncf/artwork/master/projects/fluentd/fluentbit/icon/fluentbit-icon-color.png "Fluent Bit")
