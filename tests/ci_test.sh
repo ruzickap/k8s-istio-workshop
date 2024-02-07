@@ -14,10 +14,11 @@ kubeadm-dind-cluster_install() {
 sudo swapoff -a
 
 # Find out latest kubernetes version
-export KUBERNETES_VERSION=$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)
+KUBERNETES_VERSION=$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)
+export KUBERNETES_VERSION
 
 # Download kubectl, which is a requirement for using minikube.
-curl -sLo kubectl https://storage.googleapis.com/kubernetes-release/release/${KUBERNETES_VERSION}/bin/linux/amd64/kubectl
+curl -sLo kubectl "https://storage.googleapis.com/kubernetes-release/release/${KUBERNETES_VERSION}/bin/linux/amd64/kubectl"
 chmod +x kubectl
 sudo mv kubectl /usr/local/bin/
 
@@ -26,7 +27,8 @@ kubeadm-dind-cluster_install
 kubectl cluster-info
 
 # Commands
-sed -n '/^```bash$/,/^```$/p' docs/lab-{03..12}/README.md | sed '/^```*/d' > README.sh
+sed -n "/^\`\`\`bash$/,/^\`\`\`$/p" docs/lab-{03..12}/README.md | sed "/^\`\`\`*/d" > README.sh
+# shellcheck disable=SC1094
 source ./README.sh
 
 # Istio cleanup

@@ -63,7 +63,7 @@ kubectl get nodes -o wide
 
 ## List of GUIs used in Workshop
 
-* [Jaeger](https://www.jaegertracing.io/) - [https://istio.io/docs/tasks/telemetry/distributed-tracing/](https://istio.io/docs/tasks/telemetry/distributed-tracing/)
+* [Jaeger](https://www.jaegertracing.io/) - [https://istio.io/latest/docs/tasks/observability/distributed-tracing/](https://istio.io/latest/docs/tasks/observability/distributed-tracing/)
 
   * ```shell
     kubectl port-forward -n istio-system $(kubectl get pod -n istio-system \
@@ -166,5 +166,3 @@ kubectl get nodes -o wide
   * [Using Istio Workshop by Layer5.io](https://github.com/leecalcote/istio-service-mesh-workshop)
 
   * [Istio Workshop by Ray Tsang](https://github.com/retroryan/istio-workshop)
-
-  * [Amazon EKS Workshop - Service Mesh with Istio](https://eksworkshop.com/servicemesh_with_istio/)
