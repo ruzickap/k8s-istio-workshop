@@ -30,5 +30,3 @@ You will create this environment during the lab:
   * [Using Istio Workshop by Layer5.io](https://github.com/leecalcote/istio-service-mesh-workshop)
 
   * [Istio Workshop by Ray Tsang](https://github.com/retroryan/istio-workshop)
-
-  * [Amazon EKS Workshop - Service Mesh with Istio](https://eksworkshop.com/servicemesh_with_istio/)

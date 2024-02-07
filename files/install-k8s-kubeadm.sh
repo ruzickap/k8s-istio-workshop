@@ -1,7 +1,7 @@
 #!/bin/bash -eu
 
 MYUSER="ubuntu"
-SSH_ARGS="-o LogLevel=ERROR -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
+SSH_ARGS=("-o" "LogLevel=ERROR" "-o" "UserKnownHostsFile=/dev/null" "-o" "StrictHostKeyChecking=no")
 POD_NETWORK_CIDR="10.244.0.0/16"
 KUBERNETES_VERSION=$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt | tr -d v)
 CONTAINERD_VERSION="1.2.4"
@@ -44,17 +44,15 @@ systemctl enable containerd && systemctl start containerd
 systemctl enable kubelet && systemctl start kubelet
 "
 
-
 echo "# Set IPs form VMs and store them into variables"
-NODE_IP[0]=`terraform output -json | jq -r '.vms_public_ip.value[0]'`
-NODE_IP[1]=`terraform output -json | jq -r '.vms_public_ip.value[1]'`
-NODE_IP[2]=`terraform output -json | jq -r '.vms_public_ip.value[2]'`
-
+NODE_IP[0]=$(terraform output -json | jq -r '.vms_public_ip.value[0]')
+NODE_IP[1]=$(terraform output -json | jq -r '.vms_public_ip.value[1]')
+NODE_IP[2]=$(terraform output -json | jq -r '.vms_public_ip.value[2]')
 
 echo "# Fill the /etc/hosts on each cluster node"
-for NODE in ${NODE_IP[*]}; do
+for NODE in "${NODE_IP[@]}"; do
   echo "# ${NODE}"
-  ssh -t ${MYUSER}@$NODE ${SSH_ARGS} "sudo /bin/bash -c '
+  ssh -t "${MYUSER}@${NODE}" "${SSH_ARGS[@]}" "sudo /bin/bash -c '
     cat >> /etc/hosts << EOF2
 ${NODE_IP[0]} node1 node1.cluster.local
 ${NODE_IP[1]} node2 node2.cluster.local
@@ -63,9 +61,8 @@ EOF2
 '" && echo "# Done..."
 done
 
-
 echo "# Install kubernetes Master (${MYUSER}@${NODE_IP[0]})"
-ssh -t ${MYUSER}@${NODE_IP[0]} ${SSH_ARGS} "sudo /bin/bash -cx '
+ssh -t "${MYUSER}@${NODE_IP[0]}" "${SSH_ARGS[@]}" "sudo /bin/bash -cx '
 $INSTALL_KUBERNETES
 
 kubeadm init --cri-socket /run/containerd/containerd.sock --apiserver-cert-extra-sans=${NODE_IP[0]},${NODE_IP[1]},${NODE_IP[2]} --pod-network-cidr=$POD_NETWORK_CIDR --kubernetes-version v${KUBERNETES_VERSION}
@@ -80,16 +77,14 @@ export KUBECONFIG=/etc/kubernetes/admin.conf
 kubectl apply -f $CNI_URL
 '"
 
-
 echo "# Create bootstrap token command using: ssh ${MYUSER}@${NODE_IP[0]} \"sudo kubeadm token create --print-join-command\""
-KUBEADM_TOKEN_COMMAND=`ssh -t ${MYUSER}@${NODE_IP[0]} ${SSH_ARGS} "sudo kubeadm token create --print-join-command"`
-
+KUBEADM_TOKEN_COMMAND=$(ssh -t "${MYUSER}@${NODE_IP[0]}" "${SSH_ARGS[@]}" "sudo kubeadm token create --print-join-command")
 
 echo "# Install Kubernetes packages to all nodes and join the nodes to the master using bootstrap token"
 test -f nohup.out && rm nohup.out
 for NODE in ${NODE_IP[1]} ${NODE_IP[2]}; do
   echo "*** $NODE"
-  nohup ssh -t ${MYUSER}@$NODE ${SSH_ARGS} "sudo /bin/bash -cx '
+  nohup ssh -t "${MYUSER}@${NODE}" "${SSH_ARGS[@]}" "sudo /bin/bash -cx '
 $INSTALL_KUBERNETES > /dev/null
 hostname
 $KUBEADM_TOKEN_COMMAND --cri-socket /run/containerd/containerd.sock
@@ -97,17 +92,14 @@ $KUBEADM_TOKEN_COMMAND --cri-socket /run/containerd/containerd.sock
 '" &
 done
 
-
 echo "# Copy the kubeconfig to the local machine and get some basic details about kuberenetes cluster"
-ssh ${SSH_ARGS} ${MYUSER}@${NODE_IP[0]} "cat ~/.kube/config" | sed "s@    server: https://.*@    server: https://${NODE_IP[0]}:6443@" > kubeconfig.conf
+ssh "${SSH_ARGS[@]}" "${MYUSER}@${NODE_IP[0]}" "cat ~/.kube/config" | sed "s@    server: https://.*@    server: https://${NODE_IP[0]}:6443@" > kubeconfig.conf
 
 export KUBECONFIG=$PWD/kubeconfig.conf
 kubectl get nodes -o wide
 
-
 echo "*** Allow pods to be scheduled on the masters"
 kubectl taint nodes --all node-role.kubernetes.io/master-
-
 
 cat << \EOF
 *** Wait few minutes for the worker nodes to join..."
