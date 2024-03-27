@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.2.0](https://github.com/ruzickap/k8s-istio-workshop/compare/v0.1.1...v0.2.0) (2024-03-27)
+
+
+### Features
+
+* **gh:** add default GitHub repo files ([#134](https://github.com/ruzickap/k8s-istio-workshop/issues/134)) ([e3a4720](https://github.com/ruzickap/k8s-istio-workshop/commit/e3a47209b367a9ff2f9fda7e3d2b70f1514379d6))
+* **gh:** add default GitHub repo files ([#137](https://github.com/ruzickap/k8s-istio-workshop/issues/137)) ([191a3a9](https://github.com/ruzickap/k8s-istio-workshop/commit/191a3a95184dc2cd3379f5f7ddad5185414b7cd9))
+* **gha:** unify GHA - renovate, megalinter, markdown, and others ([#132](https://github.com/ruzickap/k8s-istio-workshop/issues/132)) ([6c2e643](https://github.com/ruzickap/k8s-istio-workshop/commit/6c2e6436838d23331058723aa8de4f2f28c97afd))
+
 ## [v0.1.1](https://github.com/ruzickap/k8s-istio-workshop/compare/v0.1.0...v0.1.1) (2021-12-20)
 
 - Improve GitHub Actions [`#85`](https://github.com/ruzickap/k8s-istio-workshop/pull/85)
